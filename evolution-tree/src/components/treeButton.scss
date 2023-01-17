@@ -1,0 +1,25 @@
+.tree-button {
+  background-color: #637675;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  border: solid;
+  border-radius: 10px;
+  width: fit-content;
+  min-width: 100px;
+  max-width: 150px;
+  height: fit-content;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.tree-button:hover {
+  background-color: #732A19;
+}
+
+.tree-button:active {
+  background-color: #8B3F2D;
+}

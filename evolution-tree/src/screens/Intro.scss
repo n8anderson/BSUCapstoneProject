@@ -1,0 +1,240 @@
+.intro {
+  overflow-x: hidden;
+  position: relative;
+
+  .intro-grid-wrapper {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      grid-auto-rows: minmax(100px, auto);
+  }
+
+  .intro-header {
+      grid-column: 1/4;
+      h1 {
+        font-weight: bolder;
+        font-size: 50px;
+      }
+  }
+  .back-button-container {
+    position: absolute;
+    grid-row: 1;
+    margin-left: 50px;
+    margin-top: 50px;
+  }
+
+  .about-evo {
+    grid-column: 2 / 4;
+    grid-row: 2 / 15;
+    // border: solid;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    background-color: whitesmoke;
+    padding: 25px;
+    margin-right: 25px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: min-content;
+    justify-content: center;
+
+    h3 {
+      margin-left: 50px;
+      width: fit-content;
+      border-bottom: solid;
+      font-family: 'Roboto';
+      margin: auto;
+      margin-bottom: 10px;
+      font-size: x-large;
+    }
+
+    p {
+      width: fit-content;
+      text-align: left;
+      padding-left: 15px;
+      padding-right: 25px;
+      margin: auto;
+      font-size: large;
+    }
+
+    .what-is {
+      grid-column: 1 / 4;
+      grid-row: 1;
+      margin-bottom: 50px;
+
+      iframe {
+        margin-top: 25px;
+      }
+    }
+
+    .why-does {
+      grid-column: 1 / 4;
+      grid-row: 2 / 3;
+      margin-bottom: 50px;
+    }
+
+    .misconception {
+      grid-column: 1 / 3;
+      grid-row: 4;
+      margin-bottom: 50px;
+    }
+
+    .misconception-vid {
+      grid-column: 3;
+      grid-row: 4;
+      margin-top: 35px;
+      margin-bottom: 50px;
+    }
+
+    .coevolution {
+      grid-column: 2;
+      grid-row: 5;
+      margin-top: 35px;
+      margin-bottom: 50px;
+    }
+
+    .coevolution-pic-left {
+      grid-column: 1;
+      grid-row: 5;
+      margin-top: 35px;
+      margin-bottom: 50px;
+      margin-left: 25px;
+      max-width: 320px;
+    }
+
+    .coevolution-pic-right {
+      grid-column: 3;
+      grid-row: 5;
+      margin-top: 35px;
+      margin-bottom: 50px;
+      margin-left: 25px;
+      max-width: 320px;
+    }
+
+    .study-of {
+      grid-column: 2 / 4;
+      grid-row: 6;
+      width: 75%;
+      margin-top: 35px;
+      margin-bottom: 50px;
+      margin-left: 25%;
+    }
+
+    .study-of-pic {
+      grid-column: 1 / 3;
+      grid-row: 6;
+      margin-top: 50px;
+      margin-bottom: 50px;
+      margin-left: 50px;
+      width: 60%;
+    }
+  }
+
+  .scientists {
+    grid-column: 2 / 4;
+    grid-row: 15 / 17;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: min-content;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+    background-color: #96A1A1;
+    margin-right: 25px;
+    border-radius: 5px;
+
+    .darwin-header {
+      grid-column: 1 / 4;
+      grid-row: 1;
+      width: fit-content;
+      margin: auto;
+      margin-top: 50px;
+      border-bottom: solid;
+      font-family: 'Roboto';
+      margin-bottom: 10px;
+      font-size: xx-large;
+    }
+
+    .darwin-pic {
+      grid-column: 1;
+      grid-row: 2;
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      margin-left: 25px;
+      margin-bottom: 25px;
+    }
+
+    .finch-pic {
+      grid-column: 3;
+      grid-row: 2;
+      width: 350px;
+      height: 300px;
+      object-fit: cover;
+      margin-left: 50px;
+      margin-bottom: 25px;
+    }
+
+    .darwin-desc {
+      grid-column: 2;
+      grid-row: 2;
+      width: fit-content;
+      text-align: center;
+      padding-left: 15px;
+      padding-right: 25px;
+      margin: auto;
+      font-size: large;
+      padding-bottom: 25px;
+    }
+  }
+
+  .vocab {
+    grid-column: 1;
+    grid-row: 2 / 17;
+    // border: solid;
+    margin-left: 10px;
+    background-color: #d3cbb4;
+    // color: white;
+    border-radius: 5px;
+
+    h3 {
+      width: fit-content;
+      border-bottom: solid;
+      font-family: 'Roboto';
+      margin: auto;
+      margin-top: 10px;
+      font-size: xx-large;
+      margin-bottom: 40px;
+    }
+
+    dt {
+      font-weight: bold;
+      text-decoration: underline;
+      text-align: left;
+      margin-left: 25px;
+      font-size: x-large;
+      margin-bottom: 25px;
+    }
+
+    dd {
+      text-align: left;
+      margin-left: 50px;
+      margin-right: 25px;
+      font-size: large;
+      margin-bottom: 25px;
+    }
+  }
+  .citation {
+    grid-column: 1 / 4;
+    grid-row: 18;
+    padding-bottom: 50px;
+    
+    .citation-container {
+      padding: 15px;
+    }
+
+    a, a:hover, a:focus, a:active {
+      text-decoration: none;
+      color: inherit;
+    }
+  };
+}

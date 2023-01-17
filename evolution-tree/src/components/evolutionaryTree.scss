@@ -1,0 +1,201 @@
+.evolutionary-tree {
+  margin-top: 10%;
+  height: 100vh;
+  pointer-events: none;
+  position: relative;
+
+  .back-button {
+    position: absolute;
+    left: 25%;
+  }
+
+  .tree-component {
+    position: relative;
+    width: fit-content;
+    margin: auto;
+
+    .evolution-tree {
+      width: 35vw;
+    }
+
+    .euchs {
+      position: absolute;
+      top: 15%;
+      left: 25%;
+      width: fit-content;
+      pointer-events: all;
+    }
+
+    .archaea {
+      position: absolute;
+      top: 50%;
+      left: 20%;
+      width: fit-content;
+      pointer-events: all;
+    }
+
+    .bacteria {
+      position: absolute;
+      top: 38%;
+      right: 12%;
+      width: fit-content;
+      pointer-events: all;
+    }
+
+    .bats {
+      position: absolute;
+      top: 10%;
+      left: 45%;
+      width: fit-content;
+      pointer-events: all;
+    }
+    .fish {
+      position: absolute;
+      top: 23%;
+      left: 17%;
+      width: fit-content;
+      pointer-events: all;
+    }
+    .anemone {
+      position: absolute;
+      top: 29%;
+      right: 15%;
+      width: fit-content;
+      pointer-events: all;
+    }
+    .whale {
+      position: absolute;
+      top: 45%;
+      left: 19%;
+      width: fit-content;
+      pointer-events: all;
+    }
+    .deer {
+      position: absolute;
+      top: 45%;
+      right: 6%;
+      width: fit-content;
+      pointer-events: all;
+    }
+    .birds {
+      position: absolute;
+      top: 60%;
+      left: 22%;
+      width: fit-content;
+      pointer-events: all;
+    }
+    .intro {
+      position: absolute;
+      bottom: 5%;
+      left: 35%;
+      width: fit-content;
+      pointer-events: all;
+    }
+  }
+}
+
+.evolution-zoom {
+  margin-top: 10%;
+  height: 100vh;
+  pointer-events: none;
+  position: relative;
+
+  .back-button {
+    position: absolute;
+    left: 25%;
+  }
+
+  .tree-component {
+    position: relative;
+    width: fit-content;
+    margin: auto;
+
+    .evolution-tree {
+      object-fit: cover;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .euchs {
+      position: absolute;
+      top: 15%;
+      left: 25%;
+      width: fit-content;
+      pointer-events: all;
+    }
+
+    .archaea {
+      position: absolute;
+      top: 50%;
+      left: 20%;
+      width: fit-content;
+      pointer-events: all;
+    }
+
+    .bacteria {
+      position: absolute;
+      top: 38%;
+      right: 12%;
+      width: fit-content;
+      pointer-events: all;
+    }
+    .fish {
+      position: absolute;
+      top: 22%;
+      right: 35%;
+      width: fit-content;
+      pointer-events: all;
+    }
+    .hiv {
+      position: absolute;
+      top: 22%;
+      right: 35%;
+      width: fit-content;
+      pointer-events: all;
+    }
+    .plant {
+      position: absolute;
+      top: 60%;
+      left: 40%;
+      width: fit-content;
+      pointer-events: all;
+    }
+    .anemone {
+      position: absolute;
+      top: 40%;
+      right: 20%;
+      width: fit-content;
+      pointer-events: all;
+    }
+    .buch-aph {
+      position: absolute;
+      top: 40%;
+      right: 19%;
+      width: fit-content;
+      pointer-events: all;
+    }
+    .deer {
+      position: absolute;
+      top: 45%;
+      right: 6%;
+      width: fit-content;
+      pointer-events: all;
+    }
+    .birds {
+      position: absolute;
+      top: 75%;
+      right: 30%;
+      width: fit-content;
+      pointer-events: all;
+    }
+    
+    .intro {
+      position: absolute;
+      bottom: 5%;
+      left: 35%;
+      width: fit-content;
+      pointer-events: all;
+    }
+  }
+}

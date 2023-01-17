@@ -1,0 +1,111 @@
+.fish-screen {
+  height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+
+  .fish-grid-wrapper {
+    background-color: #FFFFFF;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px;
+    margin-bottom: 50px;
+    grid-auto-rows: auto;
+  }
+
+  .back-button-container {
+    position: absolute;
+    grid-row: 1;
+    margin-left: 50px;
+    margin-top: 50px;
+  }
+
+
+  .italic {
+    font-style: italic;
+  }
+
+  h2 {
+    border-bottom: solid;
+    width: fit-content;
+    margin: auto;
+    font-family: 'Sora';
+    letter-spacing: 0.5px;
+  }
+
+  p {
+    font-family: 'Roboto';
+    letter-spacing: 0.5px;
+    line-height: 26px;
+  }
+
+  .header {
+    grid-column: span 8;
+    grid-row: 1;
+
+    h1 {
+      margin-top: 50px;
+    }
+
+    h3 {
+      font-style: italic;
+    }
+
+    .image-container {
+      img {
+        max-width: 500px;
+      }
+
+      p {
+        font-style: italic;
+        font-size: 10px;
+      }
+    }
+  }
+
+  .clownfish-info {
+    grid-column: 1 / 5;
+    grid-row: 2 / 8;
+    margin-left: 25px;
+
+    .info-container {
+      text-align: left;
+    }
+  }
+
+  .clownfish-photos {
+    grid-column: 5 / 9;
+    grid-row: 2 / 8;
+    margin-right: 25px;
+
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    background-color: whitesmoke;
+    padding: 25px;
+
+    img {
+      margin-top: 150px;
+    }
+  }
+
+  .citation {
+    grid-column: 1 / 9;
+    grid-row: 9;
+    padding-bottom: 50px;
+    
+    .citation-container {
+      padding: 15px;
+    }
+
+    a, a:hover, a:focus, a:active {
+      text-decoration: none;
+      color: inherit;
+      font-size: 12px;
+    }
+
+    p {
+      text-decoration: none;
+      color: inherit;
+      font-size: 12px;
+    }
+  };
+}
