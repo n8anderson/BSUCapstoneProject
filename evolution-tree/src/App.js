@@ -17,6 +17,7 @@ import Hiv from './screens/Hiv';
 import BuchAph from './screens/BuchAph';
 import Fish from './screens/Fish';
 import Intro from './screens/Intro';
+import Simulation from './screens/simulation/Simulation';
 
 // Import the functions you need from the SDKs you need
 import * as firebase from 'firebase/app';
@@ -52,6 +53,7 @@ function App() {
       <AnimatePresence mode="popLayout" initial={false}>
         <Routes location={location} key={location.pathname}>
           <Route path='/' element={<Home />} />
+          <Route path='/simulation' element={<Simulation />} />
           <Route path='/educator' element={<Educator />} />
           <Route path='/plant' element={<Plant />} />
           <Route path='/humming-bird' element={<HummingBird />} />

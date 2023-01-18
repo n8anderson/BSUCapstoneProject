@@ -9,6 +9,7 @@ function NavigationBar() {
       <div className="navBarButtonsContainer">
         <button className="navBarButton" type="button" onClick={() => navigate('/')}>Home</button>
         <button className="navBarButton" type="button" onClick={() => navigate('/educator')}>Educator Resources</button>
+        <button className="navBarButton" type="button" onClick={() => navigate('/simulation')}>Simulation</button>
       </div>
     </div>
   );

@@ -1,0 +1,19 @@
+.simulation-screen {
+  height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+
+  .back-button-container {
+    position: absolute;
+    grid-row: 1;
+    margin-left: 50px;
+    margin-top: 50px;
+  }
+
+  .species-creator {
+    width: 80vw;
+    height: 100vh;
+    border: solid;
+    margin: auto;
+  }
+}

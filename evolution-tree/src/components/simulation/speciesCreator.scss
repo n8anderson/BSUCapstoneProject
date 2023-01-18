@@ -1,0 +1,118 @@
+.species-creation-grid {
+  background-color: #FFFFFF;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
+  margin-bottom: px;
+  grid-auto-rows: auto;
+
+  align-items: center;
+}
+
+.species-image {
+  grid-column: 3 / 6;
+  grid-row: 1 / 8;
+  min-height: 80vh;
+
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  background-color: whitesmoke;
+  padding: 25px;
+}
+
+.character-legs-left {
+  grid-column: 1 / 3;
+  grid-row: 6 / 8;
+  min-height: 10vh;
+
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  background-color: whitesmoke;
+  padding: 25px;
+}
+.character-legs-right {
+  grid-column: 6 / 8;
+  grid-row: 6 / 8;
+  min-height: 10vh;
+
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  background-color: whitesmoke;
+  padding: 25px;
+}
+
+.character-body-left {
+  grid-column: 1 / 3;
+  grid-row: 2 / 6;
+  min-height: 10vh;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  background-color: whitesmoke;
+  padding: 25px;
+}
+.character-body-right {
+  grid-column: 6 / 8;
+  grid-row: 2 / 6;
+  min-height: 10vh;
+
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  background-color: whitesmoke;
+  padding: 25px;
+}
+
+.left-arrow {
+  max-width: 100%;
+}
+
+.right-arrow {
+  max-width: 100%;
+}
+
+.image-container {
+  margin-left: -550px;
+  margin-top: 100px;
+  .head {
+    position: absolute;
+  }
+
+  .body {
+    position: absolute;
+  }
+
+  .legs {
+    position: absolute;
+  }
+}
+
+.character-head-left {
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+  min-height: 10vh;
+
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  background-color: whitesmoke;
+  padding: 25px;
+}
+.character-head-right {
+  grid-column: 6 / 8;
+  grid-row: 1 / 2;
+  min-height: 10vh;
+
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  background-color: whitesmoke;
+  padding: 25px;
+}
+
+.save {
+  grid-column: 6 / 8;
+  grid-row: 9;
+  min-height: 10vh;
+
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  background-color: whitesmoke;
+  padding: 25px;
+}
