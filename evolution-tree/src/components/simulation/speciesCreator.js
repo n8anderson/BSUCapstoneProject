@@ -16,7 +16,7 @@ const head1 = require('../../assets/simulationAssets/head1.png')
 const head2 = require('../../assets/simulationAssets/head2.png')
 const head3 = require('../../assets/simulationAssets/head3.png')
 
-const apiURL = 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/testApi';
+const apiURL = 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/saveSpecies';
 
 function SpeciesCreator() {
   const heads = [head1, head2, head3];
@@ -87,7 +87,7 @@ function SpeciesCreator() {
       body: bodyIndex,
       head: headIndex,
       legs: legIndex
-    })
+    }).then((res) => console.log(res))
   }
 
   return (
