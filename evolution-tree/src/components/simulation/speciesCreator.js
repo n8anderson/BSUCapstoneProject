@@ -23,6 +23,7 @@ function SpeciesCreator() {
   const bodies = [body1, body2, body3];
   const legs = [legs1, legs2, legs3];
 
+  // Hello
   const [headIndex, setHeadIndex] = useState(0)
   const [bodyIndex, setBodyIndex] = useState(0)
   const [legIndex, setLegIndex] = useState(0)
