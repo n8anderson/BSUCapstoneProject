@@ -1,6 +1,12 @@
 /* eslint-disable max-len */
 const functions = require("firebase-functions");
 const testApi = require("./routes/simulationRoute");
+const firebaseAdmin = require('firebase-admin');
+const serviceAccount = require('./serviceAccount.json');
+
+firebaseAdmin.initializeApp({
+  credential: firebaseAdmin.credential.cert(serviceAccount),
+})
 
 // // Create and deploy your first functions
 // // https://firebase.google.com/docs/functions/get-started

@@ -17,7 +17,7 @@ const handleSuccess = (res, data) => {
 const registerEndpoint = (router, path, method, func) => {
   const callback = (req, res) => func(req)
     .then((result) => handleSuccess(res, result))
-    .catch((err) => handleError(res, err));
+    .catch((err) => console.log(err));
     router[method](path, callback);
 };
 
