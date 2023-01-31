@@ -3,55 +3,46 @@ const express = require('express');
 const {registerEndpoint} = require('./route-helper');
 const { getFirestore } = require('firebase-admin/firestore');
 
-const testAPIConnection = (req) => {
-  console.log('Got request body', req.body);
-  return Promise.resolve({message: 'Success'});
-};
-
 const saveSpecies = async (req) => {
   const {
     head,
     body,
-    legs
+    legs,
+    name
   } = req.body;
-  console.log('Got the species')
-  console.log('Head:', head)
-  console.log('Body:', body)
-  console.log('Legs:', legs)
-  console.log(getFirestore())
   await getFirestore().collection('species').add({
       headIndex: head,
       bodyIndex: body,
-      legsIndex: legs
+      legsIndex: legs,
+      name: name
     })
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
-  // const batch = getFirestore().collection().add({})
-  // .collection('savedSpecies')
-  // .set({
-  //   headIndex: head,
-  //   bodyIndex: body,
-  //   legsIndex: legs
-  // })
 
   return Promise.resolve({message: 'Success'});
 }
 
-const router = express.Router();
-registerEndpoint(
-  router,
-  '/testApi',
-  'post',
-  testAPIConnection,
-  false
-);
+const getSpecies = async () => {
+  const snapshot = await getFirestore().collection('species').get()
 
-registerEndpoint(
-  router,
-  '/saveSpecies',
-  'post',
-  saveSpecies,
-  false
-);
+  const speciesList = {}
+  let options = []
+  snapshot.forEach((doc) => {
+    const species = doc.data()
+
+    speciesList[doc.id] = {...species}
+    options.push({
+      value: doc.id,
+      label: doc.data().name
+    })
+  })
+
+  return Promise.resolve({speciesList: speciesList, options: options})
+}
+
+const router = express.Router();
+
+registerEndpoint(router, '/saveSpecies', 'post', saveSpecies);
+registerEndpoint(router, '/getSpecies', 'get', getSpecies);
 
 module.exports = router;

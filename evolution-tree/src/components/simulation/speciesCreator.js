@@ -18,15 +18,14 @@ const head3 = require('../../assets/simulationAssets/head3.png')
 
 const apiURL = 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/saveSpecies';
 
-function SpeciesCreator() {
+function SpeciesCreator({
+  headIndex, setHeadIndex, bodyIndex, setBodyIndex,
+  legIndex, setLegIndex, key
+}) {
   const heads = [head1, head2, head3];
   const bodies = [body1, body2, body3];
   const legs = [legs1, legs2, legs3];
-
-  // Hello
-  const [headIndex, setHeadIndex] = useState(0)
-  const [bodyIndex, setBodyIndex] = useState(0)
-  const [legIndex, setLegIndex] = useState(0)
+  const [name, setName] = useState('');
 
   const [currentHead, setCurrentHead] = useState(heads[headIndex]);
   const [currentBody, setCurrentBody] = useState(bodies[bodyIndex]);
@@ -87,12 +86,17 @@ function SpeciesCreator() {
     axios.post(apiURL, {
       body: bodyIndex,
       head: headIndex,
-      legs: legIndex
+      legs: legIndex,
+      name: name
     }).then((res) => console.log(res))
   }
 
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  }
+
   return (
-    <div className="species-creation-grid">
+    <div key={key} className="species-creation-grid">
       <div className="species-image">
         <div className="image-container">
           <img src={currentHead} className="head" alt="Species Head" />
@@ -118,6 +122,10 @@ function SpeciesCreator() {
       <div className="character-head-right" onClick={() => handleClick('head', 'right')}>
         <img src={RightArrow} alt="Fancy Arrow Png @clipartmax.com" className="right-arrow"/>
       </div>
+      <form className="namebox">
+        <label>Species Name</label> 
+        <input type="text" value={name} onChange={(text) => handleNameChange(text)} />
+      </form>
       <div className="save" onClick={() => handleSave()}>
         <h2>Save</h2>
       </div>

@@ -13,7 +13,51 @@
   .species-creator {
     width: 80vw;
     height: 100vh;
-    border: solid;
     margin: auto;
   }
+
+  .infobox-head {
+    position: absolute;
+    border: solid;
+    height: 20vh;
+    width: 18vw;
+    top: 20%;
+    margin-left: 10px;
+  }
+  .infobox-body {
+    position: absolute;
+    border: solid;
+    height: 20vh;
+    width: 18vw;
+    top: 40%;
+    right: 10px;
+    margin-left: 10px;
+  }
+  .infobox-leg {
+    position: absolute;
+    border: solid;
+    height: 20vh;
+    width: 18vw;
+    bottom: 10%;
+    margin-left: 10px;
+  }
+
+  .load-species {
+    position: absolute;
+    height: 20vh;
+    width: 18vw;
+    top: 15%;
+    right: 20px;
+
+    .load {
+      height: 50px;
+      border: solid;
+      .header {
+        line-height: 50px;
+        text-align: center;
+        margin-top: -4px;
+      }
+    }
+  }
+
 }
