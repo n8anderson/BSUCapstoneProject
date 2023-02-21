@@ -5,7 +5,7 @@ const headInfo = {
     },
     1: {
       info: 'Information about the head attribute for the second head',
-      score: 50
+      score: 250
     },
     2: {
       info: 'Information about the head attribute for the third head',

@@ -1,0 +1,92 @@
+.simulation-screen {
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+
+  .background {
+    width: 100%;
+    height: 100%;
+    .arctic {
+      width: 100vw;
+      height: 100%;
+      background-image: url(\\assets\\simulationBackgrounds\\arctic.png);
+      align-items: center;
+      margin: auto;
+    }
+
+    .desert {
+      width: 100vw;
+      height: 100%;
+      background-image: url(\\assets\\simulationBackgrounds\\desert.png);
+      align-items: center;
+      margin: auto;
+    }
+
+    .ocean {
+      width: 100vw;
+      height: 100%;
+      background-image: url(\\assets\\simulationBackgrounds\\ocean.png);
+      align-items: center;
+      margin: auto;
+    }
+
+    .rainforest {
+      width: 100vw;
+      height: 100%;
+      background-image: url(\\assets\\simulationBackgrounds\\rainforest.png);
+      align-items: center;
+      margin: auto;
+    }
+
+    .back-button-container {
+      position: absolute;
+      margin-left: 50px;
+      margin-top: 50px;
+    }
+
+  
+    .species-view {
+      min-height: 80vh;
+      
+      padding: 25px;
+    }
+      
+    .interact-box {
+      flex-direction: row;
+      justify-content: space-between;
+      width: fit-content;
+      right: 100px;
+      position: absolute;
+    
+      .next {
+        min-height: 5vh;
+        min-width: 150px;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+        border-radius: 5px;
+        background-color: whitesmoke;
+      }
+      .next:hover {
+        background-color: #732A19;
+        h2 {
+          color: white;
+        }
+      }
+        
+        .next:active {
+          background-color: #8B3F2D;
+          color: white;
+        }
+      }
+      
+        .load-habitat {
+          position: absolute;
+          // height: 20vh;
+          width: 18vw;
+          top: 15%;
+          right: 40px;
+          background-color: white;
+        }
+      
+      }
+}
