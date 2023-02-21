@@ -5,8 +5,9 @@ import BackButton from '../../components/backButton';
 import './HabitatSelection.scss';
 import Select from "react-dropdown-select";
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const apiURL = 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/getSpecies';
+const apiURL = 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/getRoom';
 
 const legs1 = require('../../assets/simulationAssets/legs1.png')
 const legs2 = require('../../assets/simulationAssets/legs2.png')
@@ -24,24 +25,22 @@ function HabitatSelection() {
   const navigate = useNavigate()
 
   const [savedSpecies, setSavedSpecies] = useState(null)
+  const [classID, setClassID] = useState(null);
+  const [className, setClassName] = useState(null);
   const options = [
     {
-      // value: '\\assets\\simulationBackgrounds\\arctic.jpg',
       value: 'arctic',
       label: 'Arctic'
     },
     {
-      // value: '/assets/simulationBackgrounds/desert.png',
       value: 'desert',
       label: 'Desert'
     },
     {
-      // value: '/assets/simulationBackgrounds/ocean.png',
       value: 'ocean',
       label: 'Ocean'
     },
     {
-      // value: '/assets/simulationBackgrounds/rainforest.png',
       value: 'rainforest',
       label: 'Rainforest'
     }
@@ -66,6 +65,31 @@ function HabitatSelection() {
     navigate(`/habitatSelection`)
   }
 
+  const buttonStyle = {
+    backgroundColor: 'black',
+    color: 'white',
+    fontSize: 20,
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 25,
+    position: 'absolute',
+    top: '25%',
+    right: 100
+  };
+
+  const onConfirm = async () => {
+    console.log('here');
+    if (!classID) {
+      return
+    }
+
+    const loadedInfo = await axios.post(apiURL, {
+      roomID: classID
+    })
+
+    setSelectedHabitat(loadedInfo.data.habitat);
+    setClassName(loadedInfo.data.className)
+  }
 
   return (
     <motion.div className="simulation-screen">
@@ -76,6 +100,13 @@ function HabitatSelection() {
             <BackButton />
           </div>
           <div className="species-view">
+            {
+              className
+              &&
+              (
+                <h1>{className}</h1>
+              )
+            }
             <div className="species-image">
               <div className="image-container">
                 <img src={heads[headIndex]} className="head" alt="Species Head" />
@@ -95,6 +126,16 @@ function HabitatSelection() {
             onChange={(values) => setSelectedHabitat(values[0].value)}
             className="load-habitat"
           />
+          <form className="classname">
+            <label style={{ marginRight: 15 }}>Class ID:</label> 
+            <input type="text" onChange={(event) => setClassID(event.target.value)} />
+          </form>
+          <button
+            style={buttonStyle}
+            onClick={() => onConfirm()}
+          >
+            Confirm
+          </button>
         </div>
       </div>
     </motion.div>

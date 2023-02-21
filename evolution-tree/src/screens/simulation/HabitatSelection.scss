@@ -6,7 +6,7 @@
 
   .background {
     width: 100%;
-    height: 100%;
+    height: 110%;
     .arctic {
       width: 100vw;
       height: 100%;
@@ -47,8 +47,7 @@
 
   
     .species-view {
-      min-height: 80vh;
-      
+      min-height: 60vh;
       padding: 25px;
     }
       
@@ -73,20 +72,27 @@
         }
       }
         
-        .next:active {
-          background-color: #8B3F2D;
-          color: white;
-        }
+      .next:active {
+        background-color: #8B3F2D;
+        color: white;
       }
+    }
       
-        .load-habitat {
-          position: absolute;
-          // height: 20vh;
-          width: 18vw;
-          top: 15%;
-          right: 40px;
-          background-color: white;
-        }
+    .load-habitat {
+      position: absolute;
+      // height: 20vh;
+      width: 18vw;
+      top: 15%;
+      right: 40px;
+      background-color: white;
+    }
+
+    .classname {
+      position: absolute;
+      width: 18vw;
+      top: 25%;
+      right: 40px;
+    }
       
-      }
+  } 
 }
