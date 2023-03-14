@@ -77,6 +77,37 @@
         color: white;
       }
     }
+    .random-box {
+      flex-direction: row;
+      justify-content: space-between;
+      width: fit-content;
+      right: 45%;
+      position: absolute;
+    
+      .random {
+        min-height: 5vh;
+        min-width: 150px;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+        border-radius: 5px;
+        background-color: whitesmoke;
+        justify-content: center;
+      }
+      h2 {
+        text-align: center;
+        margin: auto;
+      }
+      .random:hover {
+        background-color: #732A19;
+        h2 {
+          color: white;
+        }
+      }
+        
+      .random:active {
+        background-color: #8B3F2D;
+        color: white;
+      }
+    }
       
     .load-habitat {
       position: absolute;

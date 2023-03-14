@@ -107,6 +107,12 @@ function HabitatSelection() {
     setClassName(loadedInfo.data.className)
   }
 
+  const handleRandom = () => {
+    const choice = options[Math.floor((options.length *  Math.random()))]
+
+    setSelectedHabitat(choice.value)
+  };
+
   return (
     <motion.div className="simulation-screen">
       <NavigationBar />
@@ -137,6 +143,11 @@ function HabitatSelection() {
             <div className="interact-box">
               <div className="next" onClick={() => handleNext()}>
                 <h2>Next</h2>
+              </div>
+            </div>
+            <div className="random-box">
+              <div className="random" onClick={() => handleRandom()}>
+                <h2>Random</h2>
               </div>
             </div>
           </div>

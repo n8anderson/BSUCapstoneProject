@@ -62,17 +62,20 @@ function Simulation() {
       <div className="infobox-head">
         <h3>Head Attribute</h3>
         <p>{headInfo[headIndex].info}</p>
-        <p>Score: {headInfo[headIndex].score}</p>
+        <p>Pros: {headInfo[headIndex].pros}</p>
+        <p>Cons: {headInfo[headIndex].cons}</p>
       </div>
       <div className="infobox-body">
         <h3>Body Attribute</h3>
         <p>{bodyInfo[bodyIndex].info}</p>
-        <p>Score: {bodyInfo[bodyIndex].score}</p>
+        <p>Pros: {bodyInfo[bodyIndex].pros}</p>
+        <p>Cons: {bodyInfo[bodyIndex].cons}</p>
       </div>
       <div className="infobox-leg">
         <h3>Legs Attribute</h3>
         <p>{legInfo[legIndex].info}</p>
-        <p>Score: {legInfo[legIndex].score}</p>
+        <p>Pros: {legInfo[legIndex].pros}</p>
+        <p>Cons: {legInfo[legIndex].cons}</p>
       </div>
       <div className="load-species">
         <Select 
