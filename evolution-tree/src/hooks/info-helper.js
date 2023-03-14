@@ -25,7 +25,11 @@ const bodyInfo = {
   2: {
     info: 'Information about the body attribute for the third body',
     score: 100
-  }
+  },
+  3: {
+    info: 'Information about the body attribute for the fourth body',
+    score: 100
+  },
 }
 
 const legInfo = {
@@ -39,6 +43,14 @@ const legInfo = {
   },
   2: {
     info: 'Information about the leg attribute for the third legs',
+    score: 100
+  },
+  3: {
+    info: 'Information about the leg attribute for the fourth legs',
+    score: 50
+  },
+  4: {
+    info: 'Information about the leg attribute for the fifth legs',
     score: 100
   }
 }

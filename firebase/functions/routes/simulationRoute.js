@@ -8,12 +8,16 @@ const saveSpecies = async (req) => {
     head,
     body,
     legs,
+    ear,
+    mouth,
     name
   } = req.body;
   await getFirestore().collection('species').add({
       headIndex: head,
       bodyIndex: body,
       legsIndex: legs,
+      earIndex: ear,
+      mouthIndex: mouth,
       name: name
     })
     .then((res) => console.log(res))

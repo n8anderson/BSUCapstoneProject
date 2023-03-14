@@ -9,15 +9,27 @@ import axios from 'axios';
 
 const apiURL = 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/getRoom';
 
-const legs1 = require('../../assets/simulationAssets/legs1.png')
-const legs2 = require('../../assets/simulationAssets/legs2.png')
-const legs3 = require('../../assets/simulationAssets/legs3.png')
-const body1 = require('../../assets/simulationAssets/body1.png')
-const body2 = require('../../assets/simulationAssets/body2.png')
-const body3 = require('../../assets/simulationAssets/body3.png')
-const head1 = require('../../assets/simulationAssets/head1.png')
-const head2 = require('../../assets/simulationAssets/head2.png')
-const head3 = require('../../assets/simulationAssets/head3.png')
+const smallEyes = require('../../assets/simulationAssets/bodyAssets/smallEyes.png');
+const noEyes = require('../../assets/simulationAssets/bodyAssets/noEyes.png');
+const bigEyes = require('../../assets/simulationAssets/bodyAssets/bigEyes.png');
+const balineMouth = require('../../assets/simulationAssets/bodyAssets/balineMouth.png');
+const beakMouth = require('../../assets/simulationAssets/bodyAssets/beakMouth.png');
+const sharpTeethMouth = require('../../assets/simulationAssets/bodyAssets/sharpTeethMouth.png');
+const longTongueMouth = require('../../assets/simulationAssets/bodyAssets/longTongueMouth.png');
+const cuppedEar = require('../../assets/simulationAssets/bodyAssets/cuppedEar.png');
+const smallEar = require('../../assets/simulationAssets/bodyAssets/smallEar.png');
+const noEar = require('../../assets/simulationAssets/bodyAssets/noEar.png');
+const webbedHand = require('../../assets/simulationAssets/bodyAssets/webbedHand.png');
+const taperedHand = require('../../assets/simulationAssets/bodyAssets/taperedHand.png');
+const clawHand = require('../../assets/simulationAssets/bodyAssets/clawHand.png');
+const nailedHand = require('../../assets/simulationAssets/bodyAssets/nailedHand.png');
+const paddleHand = require('../../assets/simulationAssets/bodyAssets/paddleHand.png');
+const bareBody = require('../../assets/simulationAssets/bodyAssets/bareBody.png');
+const hairBody = require('../../assets/simulationAssets/bodyAssets/hairBody.png');
+const featherBody = require('../../assets/simulationAssets/bodyAssets/featherBody.png');
+const scaleBody = require('../../assets/simulationAssets/bodyAssets/scaleBody.png');
+
+const baseImage = require('../../assets/simulationAssets/bodyAssets/baseImage.png');
 
 
 function HabitatSelection() {
@@ -52,12 +64,16 @@ function HabitatSelection() {
     headIndex,
     bodyIndex,
     legIndex,
+    earIndex,
+    mouthIndex,
     name
   } = location.state;
 
-  const heads = [head1, head2, head3];
-  const bodies = [body1, body2, body3];
-  const legs = [legs1, legs2, legs3];
+  const heads = [smallEyes, noEyes, bigEyes];
+  const bodies = [bareBody, hairBody, featherBody, scaleBody];
+  const legs = [webbedHand, taperedHand, clawHand, nailedHand, paddleHand];
+  const mouths = [balineMouth, beakMouth, sharpTeethMouth, longTongueMouth];
+  const ears = [cuppedEar, smallEar, noEar];
 
   console.log(selectedHabitat);
 
@@ -109,9 +125,12 @@ function HabitatSelection() {
             }
             <div className="species-image">
               <div className="image-container">
+                <img src={baseImage} className="" alt="Species base" />
                 <img src={heads[headIndex]} className="head" alt="Species Head" />
                 <img src={bodies[bodyIndex]} className="body" alt="Species Body" />
                 <img src={legs[legIndex]} className="legs" alt="Species Legs" />
+                <img src={mouths[mouthIndex]} className="mouth" alt="Species mouth" />
+                <img src={ears[earIndex]} className="ear" alt="Species ear" />
               </div>
               <p>{name}</p>
             </div>

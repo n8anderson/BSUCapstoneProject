@@ -12,12 +12,14 @@ const apiURL = 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/getSpec
 
 function Simulation() {
 
-  const [headIndex, setHeadIndex] = useState(0)
-  const [bodyIndex, setBodyIndex] = useState(0)
-  const [legIndex, setLegIndex] = useState(0)
-  const [savedSpecies, setSavedSpecies] = useState(null)
-  const [options, setOptions] = useState([])
-  const [loadedOption, setLoadedOption] = useState(null)
+  const [headIndex, setHeadIndex] = useState(0);
+  const [bodyIndex, setBodyIndex] = useState(0);
+  const [legIndex, setLegIndex] = useState(0);
+  const [earIndex, setEarIndex] = useState(0);
+  const [mouthIndex, setMouthIndex] = useState(0);
+  const [savedSpecies, setSavedSpecies] = useState(null);
+  const [options, setOptions] = useState([]);
+  const [loadedOption, setLoadedOption] = useState(null);
 
   useEffect(() => {
     const getSpecies = async () => {
@@ -32,6 +34,8 @@ function Simulation() {
     setBodyIndex(loadedOption.bodyIndex);
     setHeadIndex(loadedOption.headIndex);
     setLegIndex(loadedOption.legsIndex);
+    setMouthIndex(loadedOption.mouthIndex);
+    setEarIndex(loadedOption.mouthIndex);
   };
 
   return (
@@ -48,7 +52,11 @@ function Simulation() {
           setBodyIndex={setBodyIndex}
           legIndex={legIndex}
           setLegIndex={setLegIndex}
-          key={`${headIndex}${bodyIndex}${legIndex}`}
+          earIndex={earIndex}
+          setEarIndex={setEarIndex}
+          mouthIndex={mouthIndex}
+          setMouthIndex={setMouthIndex}
+          key={`${headIndex}${bodyIndex}${legIndex}${earIndex}${mouthIndex}`}
         />
       </div>
       <div className="infobox-head">
