@@ -12,6 +12,7 @@ const saveSpecies = async (req) => {
     mouth,
     name
   } = req.body;
+  let speciesId = '';
   await getFirestore().collection('species').add({
       headIndex: head,
       bodyIndex: body,
@@ -20,10 +21,20 @@ const saveSpecies = async (req) => {
       mouthIndex: mouth,
       name: name
     })
-    .then((res) => console.log(res))
+    .then((res) => speciesId = res.id)
     .catch((err) => console.log(err));
 
-  return Promise.resolve({message: 'Success'});
+  return Promise.resolve({message: 'Success', speciesId});
+}
+
+const updateSpecies = async (req) => {
+  const {
+    classID,
+    speciesId
+  } = req.body
+
+  await getFirestore().collection('species').doc(speciesId).update({ classID })
+    .then((res) => console.log(res))
 }
 
 const getSpecies = async () => {
@@ -65,15 +76,31 @@ const getRoom = async (req) => {
   const {
     roomID
   } = req.body;
-  console.log(roomID);
+
   const snapshot = await getFirestore().collection('classroom').doc(roomID).get()
 
   return Promise.resolve(snapshot.data())
 }
 
+const getAllSpeciesInRoom = async (req) => {
+  const {
+    roomID
+  } = req.body;
+
+  const snapshot = await getFirestore().collection('species').where('classID', '==', roomID).get()
+
+  const speciesInRoom = snapshot.docs.map((doc) => ({
+    speciesName: doc.data().name
+  }))
+
+  return Promise.resolve({ speciesInRoom })
+}
+
 const router = express.Router();
 
 registerEndpoint(router, '/saveSpecies', 'post', saveSpecies);
+registerEndpoint(router, '/species/update', 'post', updateSpecies);
+registerEndpoint(router, '/room/getSpecies', 'post', getAllSpeciesInRoom);
 registerEndpoint(router, '/getSpecies', 'get', getSpecies);
 registerEndpoint(router, '/createRoom', 'post', createRoom);
 registerEndpoint(router, '/getRoom', 'post', getRoom);

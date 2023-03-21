@@ -1,16 +1,16 @@
 const headInfo = {
     0: {
-      info: 'Information about the head attribute for the first head',
+      info: 'Information about the head attribute for the Small Eyes',
       pros: 'Some Pro about the trait',
       cons: 'Some Con about the trait'
     },
     1: {
-      info: 'Information about the head attribute for the second head',
+      info: 'Information about the head attribute for the No Eyes',
       pros: 'Some Pro about the trait',
       cons: 'Some Con about the trait'
     },
     2: {
-      info: 'Information about the head attribute for the third head',
+      info: 'Information about the head attribute for the Big Eyes',
       pros: 'Some Pro about the trait',
       cons: 'Some Con about the trait'
     }
@@ -18,22 +18,22 @@ const headInfo = {
 
 const bodyInfo = {
   0: {
-    info: 'Information about the body attribute for the first body',
+    info: 'Information about the body attribute for the Bare body',
     pros: 'Some Pro about the trait',
     cons: 'Some Con about the trait'
   },
   1: {
-    info: 'Information about the body attribute for the second body',
+    info: 'Information about the body attribute for the Hairy body',
     pros: 'Some Pro about the trait',
     cons: 'Some Con about the trait'
   },
   2: {
-    info: 'Information about the body attribute for the third body',
+    info: 'Information about the body attribute for the Feather body',
     pros: 'Some Pro about the trait',
     cons: 'Some Con about the trait'
   },
   3: {
-    info: 'Information about the body attribute for the fourth body',
+    info: 'Information about the body attribute for the Scale body',
     pros: 'Some Pro about the trait',
     cons: 'Some Con about the trait'
   },
@@ -41,27 +41,27 @@ const bodyInfo = {
 
 const legInfo = {
   0: {
-    info: 'Information about the leg attribute for the first legs',
+    info: 'Information about the leg attribute for the Webbed legs',
     pros: 'Some Pro about the trait',
     cons: 'Some Con about the trait'
   },
   1: {
-    info: 'Information about the leg attribute for the second legs',
+    info: 'Information about the leg attribute for the Tapered legs',
     pros: 'Some Pro about the trait',
     cons: 'Some Con about the trait'
   },
   2: {
-    info: 'Information about the leg attribute for the third legs',
+    info: 'Information about the leg attribute for the Claw legs',
     pros: 'Some Pro about the trait',
     cons: 'Some Con about the trait'
   },
   3: {
-    info: 'Information about the leg attribute for the fourth legs',
+    info: 'Information about the leg attribute for the Nailed legs',
     pros: 'Some Pro about the trait',
     cons: 'Some Con about the trait'
   },
   4: {
-    info: 'Information about the leg attribute for the fifth legs',
+    info: 'Information about the leg attribute for the Paddle legs',
     pros: 'Some Pro about the trait',
     cons: 'Some Con about the trait'
   }

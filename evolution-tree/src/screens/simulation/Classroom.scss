@@ -1,0 +1,27 @@
+.classroom-screen {
+  height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+
+  .classroom-grid-wrapper {
+    background-color: #FFFFFF;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px;
+    margin-bottom: 50px;
+    grid-auto-rows: auto;
+  }
+
+  .back-button-container {
+    position: absolute;
+    grid-row: 1;
+    margin-left: 50px;
+    margin-top: 50px;
+  }
+
+  .species-list {
+    grid-row: 1;
+    grid-column: 3 / 7;
+  }
+
+}

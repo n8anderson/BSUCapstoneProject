@@ -22,6 +22,7 @@ import Simulation from './screens/simulation/Simulation';
 // Import the functions you need from the SDKs you need
 import * as firebase from 'firebase/app';
 import HabitatSelection from './screens/simulation/HabitatSelection';
+import Classroom from './screens/simulation/Classroom';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -56,6 +57,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/simulation' element={<Simulation />} />
           <Route path='/habitatSelection' element={<HabitatSelection />} />
+          <Route path='/classroom' element={<Classroom />} />
           <Route path='/educator' element={<Educator />} />
           <Route path='/plant' element={<Plant />} />
           <Route path='/humming-bird' element={<HummingBird />} />

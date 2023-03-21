@@ -138,24 +138,27 @@ function SpeciesCreator({
     }
   }
 
-  const handleSave = () => {
-    axios.post(apiURL, {
+  const handleSave = async () => {
+    const result = await axios.post(apiURL, {
       body: bodyIndex,
       head: headIndex,
       legs: legIndex,
       mouth: mouthIndex,
       ear: earIndex,
       name: name
-    }).then((res) => console.log(res))
+    });
+
+    return result.data.speciesId
   }
 
-  const handleNext = () => {
-    handleSave();
+  const handleNext = async () => {
+    const speciesId = await handleSave();
     navigate(`/habitatSelection`, {state: { headIndex: headIndex,
                                             bodyIndex: bodyIndex,
                                             legIndex: legIndex,
                                             mouthIndex: mouthIndex,
-                                            earIndex: earIndex
+                                            earIndex: earIndex,
+                                            speciesId: speciesId
                                           }})
   }
 
