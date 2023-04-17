@@ -10,6 +10,11 @@
     gap: 10px;
     margin-bottom: 50px;
     grid-auto-rows: auto;
+
+    .table {
+      grid-row: 1;
+      grid-column: 3 / 6;
+    }
   }
 
   .back-button-container {
@@ -19,9 +24,5 @@
     margin-top: 50px;
   }
 
-  .species-list {
-    grid-row: 1;
-    grid-column: 3 / 7;
-  }
 
 }

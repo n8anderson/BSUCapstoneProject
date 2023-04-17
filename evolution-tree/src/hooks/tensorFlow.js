@@ -18,21 +18,21 @@ export function generateData() {
     }
   }
 
+  console.log(label);
   const tfInput = tf.tensor(input, [100, 1]);
   const tfLabel = tf.tensor(label, [100, 1]);
 
   return [tfInput, tfLabel];
 }
 
-export function createModel({
+export function createModel(
   units=1,
   learningRate=0.01,
   optimizer="adam"
-}) {
+) {
   const selectOptimizer = (optimizer) => {
     return OPTIMIZERS[optimizer].fn(learningRate);
   };
-
   const model = tf.sequential();
   model.add(tf.layers.dense({units, inputShape: [1] }));
   model.compile({
