@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import NavigationBar from '../../components/navigationBar';
 import BackButton from '../../components/backButton';
 import './HabitatSelection.scss';
 import Select from "react-dropdown-select";
 import { useLocation, useNavigate } from 'react-router-dom';
+import { habitatInfo } from '../../hooks/info-helper';
 import axios from 'axios';
 
 const apiURL = 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/getRoom';
@@ -55,6 +56,30 @@ function HabitatSelection() {
     {
       value: 'rainforest',
       label: 'Rainforest'
+    },
+    {
+      value: 'cave',
+      label: 'Cave'
+    },
+    {
+      value: 'grassland',
+      label: 'Grasslands'
+    },
+    {
+      value: 'mountain',
+      label: 'Mountain'
+    },
+    {
+      value: 'swamp',
+      label: 'Swamp'
+    },
+    {
+      value: 'deciduous-forest',
+      label: 'Temperate Deciduous Forest'
+    },
+    {
+      value: 'savannah',
+      label: 'Savannah'
     }
   ]
   
@@ -76,18 +101,17 @@ function HabitatSelection() {
   const mouths = [balineMouth, beakMouth, sharpTeethMouth, longTongueMouth];
   const ears = [cuppedEar, smallEar, noEar];
 
-  console.log(classID);
-
   const handleNext = async () => {
     const url = `http://127.0.0.1:5001/bsu-directed-study/us-central1/api/species/update`
-    await axios.post(url, { speciesId, classID })
+    await axios.post(url, { speciesId, classID, habitat: selectedHabitat })
     navigate(`/classroom`, {state: { headIndex: headIndex,
       bodyIndex: bodyIndex,
       legIndex: legIndex,
       mouthIndex: mouthIndex,
       earIndex: earIndex,
       speciesId: speciesId,
-      classID: classID
+      classID: classID,
+      habitat: selectedHabitat
     }})
   }
 
@@ -130,6 +154,18 @@ function HabitatSelection() {
         <div className={selectedHabitat}>
           <div className="back-button-container">
             <BackButton />
+          </div>
+          <div className="habitat-box">
+            <h3>{habitatInfo[selectedHabitat].name}</h3>
+            {habitatInfo[selectedHabitat].bodyText.split('\n').map((value) => (
+              <p>{value}</p>
+            ))}
+            <a
+              className="citation"
+              href={habitatInfo[selectedHabitat].citation}
+            >
+              Citation
+            </a>
           </div>
           <div className="species-view">
             {
