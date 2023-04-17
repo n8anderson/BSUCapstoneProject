@@ -133,7 +133,7 @@ function Educator() {
         onRequestClose={() => {
           setModalVisible(false)
           setIsConfirmed(false)
-          setSelectedHabitats(null)
+          setSelectedHabitats([])
         }}
         ariaHideApp={false}
       >
