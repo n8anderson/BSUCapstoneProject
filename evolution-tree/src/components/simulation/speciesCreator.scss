@@ -151,31 +151,3 @@
     font-size: 20px;
   }
 }
-
-.interact-box {
-  grid-column: 8 / 11;
-  grid-row: 9;
-  flex-direction: row;
-  justify-content: space-between;
-  display: flex;
-  width: 325px;
-
-  .save {
-    min-height: 5vh;
-    min-width: 150px;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
-    border-radius: 5px;
-    background-color: whitesmoke;
-  }
-  .save:hover {
-    background-color: #732A19;
-    h2 {
-      color: white;
-    }
-  }
-  
-  .save:active {
-    background-color: #8B3F2D;
-    color: white;
-  }
-}

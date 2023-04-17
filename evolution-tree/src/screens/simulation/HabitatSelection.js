@@ -94,7 +94,7 @@ function HabitatSelection() {
   const handleNext = async () => {
     const url = `http://127.0.0.1:5001/bsu-directed-study/us-central1/api/species/update`
     await axios.post(url, { speciesId, classID, habitat: selectedHabitat })
-    navigate(`/classroom`, {state: { headIndex: headIndex,
+    navigate(`/results`, {state: { headIndex: headIndex,
       bodyIndex: bodyIndex,
       legIndex: legIndex,
       mouthIndex: mouthIndex,
