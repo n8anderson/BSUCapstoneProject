@@ -174,21 +174,26 @@
       flex-direction: row;
       justify-content: space-between;
       width: fit-content;
-      right: 45%;
+      left: 50%;
+      translate: -50%;
       position: absolute;
     
       .random {
-        min-height: 5vh;
         min-width: 150px;
+        padding: 5px;
         box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
         border-radius: 5px;
         background-color: whitesmoke;
         justify-content: center;
+        display: table-cell;
+
+        h2 {
+          text-align: center;
+          margin: auto;
+          vertical-align: middle;
+        }
       }
-      h2 {
-        text-align: center;
-        margin: auto;
-      }
+
       .random:hover {
         background-color: #732A19;
         h2 {
@@ -204,7 +209,6 @@
       
     .load-habitat {
       position: absolute;
-      // height: 20vh;
       width: 18vw;
       top: 15%;
       right: 40px;
@@ -221,6 +225,29 @@
       top: 25%;
       right: 40px;
     }
-      
+    
+    .class-header {
+      background-color: white;
+      position: absolute;
+      padding-inline: 20px;
+      top: 8vh;
+      width: fit-content;
+      left: 50%;
+      text-align: center;
+      translate: -50%;
+      border-radius: 8px;
+    }
+    .student-header {
+      background-color: white;
+      width: fit-content;
+      padding-inline: 20px;
+      position: absolute;
+      bottom: 8vh;
+      left: 50%;
+      text-align: center;
+      translate: -50%;
+      border-radius: 8px;
+    }
+    
   } 
 }

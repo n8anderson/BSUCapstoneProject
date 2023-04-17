@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import NavigationBar from '../../components/navigationBar';
 import BackButton from '../../components/backButton';
@@ -7,6 +7,7 @@ import Select from "react-dropdown-select";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { habitatInfo } from '../../hooks/info-helper';
 import axios from 'axios';
+import Modal from 'react-modal';
 
 const apiURL = 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/getRoom';
 
@@ -37,53 +38,34 @@ function HabitatSelection() {
   const location = useLocation();
   const navigate = useNavigate()
 
-  const [savedSpecies, setSavedSpecies] = useState(null)
   const [classID, setClassID] = useState(null);
   const [className, setClassName] = useState(null);
-  const options = [
+
+  const options = Object.entries(habitatInfo).map(([key, value]) => (
     {
-      value: 'arctic',
-      label: 'Arctic'
-    },
-    {
-      value: 'desert',
-      label: 'Desert'
-    },
-    {
-      value: 'ocean',
-      label: 'Ocean'
-    },
-    {
-      value: 'rainforest',
-      label: 'Rainforest'
-    },
-    {
-      value: 'cave',
-      label: 'Cave'
-    },
-    {
-      value: 'grassland',
-      label: 'Grasslands'
-    },
-    {
-      value: 'mountain',
-      label: 'Mountain'
-    },
-    {
-      value: 'swamp',
-      label: 'Swamp'
-    },
-    {
-      value: 'deciduous-forest',
-      label: 'Temperate Deciduous Forest'
-    },
-    {
-      value: 'savannah',
-      label: 'Savannah'
+      value: key,
+      label: value.name
     }
-  ]
+  ));
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      width: 400,
+      height: 400
+    },
+  };
   
   const [selectedHabitat, setSelectedHabitat] = useState('arctic');
+  const [createStudentVisible, setCreateStudentVisible] = useState(false);
+  const [studentAlias, setStudentAlias] = useState(null);
+  const [teacherSelectedHabitats, setTeacherSelectedHabitats] = useState(false);
+  const [studentID, setStudentID] = useState(null);
 
   const {
     headIndex,
@@ -100,6 +82,14 @@ function HabitatSelection() {
   const legs = [webbedHand, taperedHand, clawHand, nailedHand, paddleHand];
   const mouths = [balineMouth, beakMouth, sharpTeethMouth, longTongueMouth];
   const ears = [cuppedEar, smallEar, noEar];
+
+  const [classOptions, setClassOptions] = useState(null);
+
+  useEffect(() => {
+    if (className && !studentID) {
+      setCreateStudentVisible(true);
+    }
+  }, [className, studentID])
 
   const handleNext = async () => {
     const url = `http://127.0.0.1:5001/bsu-directed-study/us-central1/api/species/update`
@@ -128,7 +118,6 @@ function HabitatSelection() {
   };
 
   const onConfirm = async () => {
-    console.log('here');
     if (!classID) {
       return
     }
@@ -136,19 +125,60 @@ function HabitatSelection() {
     const loadedInfo = await axios.post(apiURL, {
       roomID: classID
     })
-
-    setSelectedHabitat(loadedInfo.data.habitat);
+    
+    const { selectedHabitats } = loadedInfo.data
+    setSelectedHabitat(selectedHabitats[0])
+    setTeacherSelectedHabitats(selectedHabitats)
+    setClassOptions(options.filter((option) => selectedHabitats.includes(option.value)))
     setClassName(loadedInfo.data.className)
   }
 
   const handleRandom = () => {
-    const choice = options[Math.floor((options.length *  Math.random()))]
+    const usedOptions = classOptions || options;
+    const choice = usedOptions[Math.floor((usedOptions.length *  Math.random()))]
 
     setSelectedHabitat(choice.value)
   };
 
+  const saveStudentName = async () => {
+    const studentURL = 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/student';
+    const result = await axios.post(studentURL, {
+      roomID: classID,
+      speciesId: speciesId,
+      habitatsToComplete: teacherSelectedHabitats
+    });
+    setStudentID(result.data.studentId);
+    setCreateStudentVisible(false);
+  }
+
+  const getCreateStudentContent = () => (
+    <div>
+      <h2>Please Enter Your Name:</h2>
+      <form className="classname">
+        <label style={{ marginRight: 15 }}>Name:</label> 
+        <input type="text" onChange={(event) => setStudentAlias(event.target.value)} />
+      </form>
+      <button
+        style={buttonStyle}
+        onClick={() => saveStudentName()}
+      >
+        Confirm
+      </button>
+    </div>
+  );
+
   return (
     <motion.div className="simulation-screen">
+      <Modal
+        isOpen={createStudentVisible}
+        style={customStyles}
+        onRequestClose={() => {
+          setCreateStudentVisible(false);
+        }}
+        ariaHideApp={false}
+      >
+        {getCreateStudentContent()}
+      </Modal>
       <NavigationBar />
       <div className="background">
         <div className={selectedHabitat}>
@@ -172,7 +202,14 @@ function HabitatSelection() {
               className
               &&
               (
-                <h1>{className}</h1>
+                <h1 className="class-header">{className}</h1>
+              )
+            }
+            {
+              studentID
+              &&
+              (
+                <h1 className="student-header">{studentAlias}</h1>
               )
             }
             <div className="species-image">
@@ -188,7 +225,7 @@ function HabitatSelection() {
             </div>
             <div className="interact-box">
               <div className="next" onClick={() => handleNext()}>
-                <h2>Next</h2>
+                <h2>{className ? 'Start' : 'Next'}</h2>
               </div>
             </div>
             <div className="random-box">
@@ -198,7 +235,7 @@ function HabitatSelection() {
             </div>
           </div>
           <Select 
-            options={options}
+            options={classOptions || options}
             onChange={(values) => setSelectedHabitat(values[0].value)}
             className="load-habitat"
           />

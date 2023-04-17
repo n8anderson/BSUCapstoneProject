@@ -61,13 +61,13 @@ const getSpecies = async () => {
 const createRoom = async (req) => {
   const {
     name,
-    habitat,
+    selectedHabitats,
     classUUID
   } = req.body;
 
   await getFirestore().collection('classroom').doc(classUUID).set({
     className: name,
-    habitat
+    selectedHabitats
   })
   .then((res) => console.log(res))
   .catch((err) => console.log(err));
@@ -99,6 +99,32 @@ const getAllSpeciesInRoom = async (req) => {
   return Promise.resolve({ speciesInRoom })
 }
 
+const createStudent = async (req) => {
+  const {
+    roomID,
+    speciesId,
+    habitatsToComplete
+  } = req.body;
+
+  const habitatObject = {};
+
+  habitatsToComplete.forEach((habitat) => {
+    habitatObject[habitat] = false
+  });
+
+  let studentId = ''
+  await getFirestore().collection('student').add({
+    roomID,
+    speciesID: speciesId,
+    habitatStatus: habitatObject
+  })
+  .then((res) => studentId = res.id)
+  .catch((err) => console.log(err));
+
+  console.log(studentId);
+  return Promise.resolve({ message: 'success', studentId });
+}
+
 const router = express.Router();
 
 registerEndpoint(router, '/saveSpecies', 'post', saveSpecies);
@@ -107,5 +133,6 @@ registerEndpoint(router, '/room/getSpecies', 'post', getAllSpeciesInRoom);
 registerEndpoint(router, '/getSpecies', 'get', getSpecies);
 registerEndpoint(router, '/createRoom', 'post', createRoom);
 registerEndpoint(router, '/getRoom', 'post', getRoom);
+registerEndpoint(router, '/student', 'post', createStudent);
 
 module.exports = router;

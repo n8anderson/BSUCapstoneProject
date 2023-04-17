@@ -4,9 +4,10 @@ import BackButton from '../components/backButton';
 import './Educator.scss'
 import { useState } from 'react';
 import Modal from 'react-modal';
-import Select from "react-dropdown-select";
 import ShortUniqueId from "short-unique-id";
 import axios from 'axios';
+import { habitatInfo } from '../hooks/info-helper';
+import HabitatSelectionButton from '../components/habitatSelectionButton';
 
 function Educator() {
 
@@ -14,29 +15,11 @@ function Educator() {
 
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [habitatSelected, setHabitatSelected] = useState(null);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [className, setClassName] = useState(null);
   const [UUID, setUUID] = useState(null);
 
-  const options = [
-    {
-      value: 'arctic',
-      label: 'Arctic'
-    },
-    {
-      value: 'desert',
-      label: 'Desert'
-    },
-    {
-      value: 'ocean',
-      label: 'Ocean'
-    },
-    {
-      value: 'rainforest',
-      label: 'Rainforest'
-    }
-  ]
+  const [selectedHabitats, setSelectedHabitats] = useState([]);
   
   const customStyles = {
     content: {
@@ -66,14 +49,22 @@ function Educator() {
     marginTop: 25,
   };
 
+  const disabledButtonStyle = {
+    backgroundColor: 'grey',
+    color: 'white',
+    fontSize: 20,
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 25,
+  }
+
   const onConfirm = () => {
     const getUuid = new ShortUniqueId({ length: 6});
     const uuid = getUuid();
-    console.log(typeof uuid);
     setUUID(uuid)
     const payload = {
       name: className,
-      habitat: habitatSelected,
+      selectedHabitats,
       classUUID: uuid
     };
     console.log(payload);
@@ -83,22 +74,32 @@ function Educator() {
     setIsConfirmed(true);
   }
 
+  const onHabitatPress = (item) => {
+    if (selectedHabitats.includes(item)) {
+      setSelectedHabitats((currSelectedHabitats) => currSelectedHabitats.filter((value) => value !== item))
+    } else {
+      setSelectedHabitats((currSelectedHabitats) => [...currSelectedHabitats, item])
+    }
+  }
+
   const getSelectHabitatContent = () => (
     <div>
-      <h2>Select a habitat for the students</h2>
-      <Select 
-        options={options}
-        onChange={(values) => setHabitatSelected(values[0].value)}
-        className="load-habitat"
-        style={{ marginBottom: 25 }}
-      />
+      <h2>Select the habitats for the students to complete</h2>
+      {Object.entries(habitatInfo).map(([key, value]) => (
+        <HabitatSelectionButton
+          item={value.name}
+          onPress={() => onHabitatPress(key)}
+          highlighted={selectedHabitats.includes(key)}
+        />
+      ))}
       <form className="classname">
         <label style={{ marginRight: 15 }}>Class Name:</label> 
         <input type="text" onChange={(event) => setClassName(event.target.value)} />
       </form>
       <button
-        style={buttonStyle}
+        style={selectedHabitats.length >= 1 ? buttonStyle : disabledButtonStyle}
         onClick={() => onConfirm()}
+        disabled={selectedHabitats.length < 1}
       >
         Confirm
       </button>
@@ -117,6 +118,7 @@ function Educator() {
     )
   };
 
+
   return (
     <motion.div
       className="educator"
@@ -131,7 +133,7 @@ function Educator() {
         onRequestClose={() => {
           setModalVisible(false)
           setIsConfirmed(false)
-          setHabitatSelected(null)
+          setSelectedHabitats(null)
         }}
         ariaHideApp={false}
       >
