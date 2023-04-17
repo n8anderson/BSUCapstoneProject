@@ -1,69 +1,338 @@
 const headInfo = {
     0: {
       info: 'Information about the head attribute for the Small Eyes',
-      pros: 'Some Pro about the trait',
-      cons: 'Some Con about the trait'
+      pros: 'Better at seeing in the dark\nHelps prevent glare during the day',
+      cons: 'Not a full range of visions',
+      habitatScores: {
+        arctic: 0.5,
+        swamp: -0.8,
+        ocean: -1,
+        mountain: 0.7,
+        temperateForest: 0.6,
+        savannah: 1,
+        cave: 1,
+        desert: 0.7,
+        rainforest: 0.7,
+        grassland: -0.8
+      }
     },
     1: {
       info: 'Information about the head attribute for the No Eyes',
-      pros: 'Some Pro about the trait',
-      cons: 'Some Con about the trait'
+      pros: 'Other senses such as hearing enhances',
+      cons: 'Can’t see predators',
+      habitatScores: {
+        arctic: 0.2,
+        swamp: 0.8,
+        ocean: -1,
+        mountain: 0.7,
+        temperateForest: 0.6,
+        savannah: 1,
+        cave: -0.7,
+        desert: -1,
+        rainforest: 0,
+        grassland: -0.4
+      }
     },
     2: {
       info: 'Information about the head attribute for the Big Eyes',
-      pros: 'Some Pro about the trait',
-      cons: 'Some Con about the trait'
+      pros: 'Improves range of vision',
+      cons: 'Can suffer short sight',
+      habitatScores: {
+        arctic: -0.2,
+        swamp: -0.8,
+        ocean: -1,
+        mountain: 0.7,
+        temperateForest: 0.6,
+        savannah: 1,
+        cave: -0.7,
+        desert: -1,
+        rainforest: 0,
+        grassland: -0.4
+      }
     }
+}
+
+const mouthInfo = {
+  0: {
+    info: 'Information about the head attribute for the Beak',
+    pros: 'Can eat hard nuts/items and cactus\nGood at Feeding young\nGood at Defending',
+    cons: 'Nothing its literally perfect, Bri plz fix this',
+    habitatScores: {
+      arctic: 0.5,
+      swamp: -0.8,
+      ocean: -1,
+      mountain: 0.7,
+      temperateForest: 0.6,
+      savannah: 1,
+      cave: 1,
+      desert: 0.7,
+      rainforest: 0.7,
+      grassland: -0.8
+    }
+  },
+  1: {
+    info: 'Information about the head attribute for the Baline Mouth',
+    pros: 'Allows filtering out water while keeping the prey in the mouth',
+    cons: 'Not able to get big prey\nCan not rip or grind',
+    habitatScores: {
+      arctic: 0.2,
+      swamp: 0.8,
+      ocean: -1,
+      mountain: 0.7,
+      temperateForest: 0.6,
+      savannah: 1,
+      cave: -0.7,
+      desert: -1,
+      rainforest: 0,
+      grassland: -0.4
+    }
+  },
+  2: {
+    info: 'Information about the head attribute for the Sharp Teeth',
+    pros: 'Can shred the meat off of their prey\nDefending',
+    cons: 'Nothing its literally perfect, Bri plz fix this',
+    habitatScores: {
+      arctic: -0.2,
+      swamp: -0.8,
+      ocean: -1,
+      mountain: 0.7,
+      temperateForest: 0.6,
+      savannah: 1,
+      cave: -0.7,
+      desert: -1,
+      rainforest: 0,
+      grassland: -0.4
+    },
+  },
+  3: {
+    info: 'Information about the head attribute for the Long Tongue',
+    pros: 'Can get insects in tight places',
+    cons: 'Can not properly defend itself',
+    habitatScores: {
+      arctic: -0.2,
+      swamp: -0.8,
+      ocean: -1,
+      mountain: 0.7,
+      temperateForest: 0.6,
+      savannah: 1,
+      cave: -0.7,
+      desert: -1,
+      rainforest: 0,
+      grassland: -0.4
+    }
+  }
+}
+
+const earInfo = {
+  0: {
+    info: 'Information about the head attribute for the Big/Cupped Ear',
+    pros: 'Can keep the organisms cool\nCan capture sound easier',
+    cons: 'Does not hold in heat',
+    habitatScores: {
+      arctic: 0.5,
+      swamp: -0.8,
+      ocean: -1,
+      mountain: 0.7,
+      temperateForest: 0.6,
+      savannah: 1,
+      cave: 1,
+      desert: 0.7,
+      rainforest: 0.7,
+      grassland: -0.8
+    }
+  },
+  1: {
+    info: 'Information about the head attribute for the small ear',
+    pros: 'Prevents heat loss',
+    cons: 'Can not capture in a lot of sound',
+    habitatScores: {
+      arctic: 0.2,
+      swamp: 0.8,
+      ocean: -1,
+      mountain: 0.7,
+      temperateForest: 0.6,
+      savannah: 1,
+      cave: -0.7,
+      desert: -1,
+      rainforest: 0,
+      grassland: -0.4
+    }
+  },
+  2: {
+    info: 'Information about the head attribute for no ear',
+    pros: 'Heightened other senses\nCan sense vibrations\nReduces drag while swimming',
+    cons: 'Hearing is reduced',
+    habitatScores: {
+      arctic: -0.2,
+      swamp: -0.8,
+      ocean: -1,
+      mountain: 0.7,
+      temperateForest: 0.6,
+      savannah: 1,
+      cave: -0.7,
+      desert: -1,
+      rainforest: 0,
+      grassland: -0.4
+    },
+  }
 }
 
 const bodyInfo = {
   0: {
     info: 'Information about the body attribute for the Bare body',
-    pros: 'Some Pro about the trait',
-    cons: 'Some Con about the trait'
+    pros: 'Speed\nPrevents overheating ',
+    cons: 'No heat trapped\nNo sun protection',
+    habitatScores: {
+      arctic: -1,
+      swamp: 0.6,
+      ocean: 0.8,
+      mountain: -1,
+      temperateForest: 0.3,
+      savannah: 0.3,
+      cave: 0.8,
+      desert: -1,
+      rainforest: 1,
+      grassland: 0.6
+    }
   },
   1: {
     info: 'Information about the body attribute for the Hairy body',
-    pros: 'Some Pro about the trait',
-    cons: 'Some Con about the trait'
+    pros: 'Regulates body temperature\nWaterproof\nDefense',
+    cons: 'Heavy material\nSlows down movement in water',
+    habitatScores: {
+      arctic: 1,
+      swamp: -1,
+      ocean: -0.6,
+      mountain: 0.8,
+      temperateForest: 0.6,
+      savannah: 0.6,
+      cave: 0.2,
+      desert: 0.5,
+      rainforest: 0.4,
+      grassland: 0.4
+    }
   },
   2: {
     info: 'Information about the body attribute for the Feather body',
-    pros: 'Some Pro about the trait',
-    cons: 'Some Con about the trait'
+    pros: 'Regulate body temperature\nCamouflage\nLight material',
+    cons: 'Needs management',
+    habitatScores: {
+      arctic: 0.2,
+      swamp: -0.8,
+      ocean: -1,
+      mountain: 0.7,
+      temperateForest: 0.6,
+      savannah: 1,
+      cave: -0.7,
+      desert: -1,
+      rainforest: 0.6,
+      grassland: 0.4
+    }
   },
   3: {
     info: 'Information about the body attribute for the Scale body',
-    pros: 'Some Pro about the trait',
-    cons: 'Some Con about the trait'
+    pros: 'Water resistant\nMakes animal streamlines',
+    cons: 'Does not hold in heat',
+    habitatScores: {
+      arctic: -0.7,
+      swamp: 1,
+      ocean: 1,
+      mountain: -0.7,
+      temperateForest: -0.6,
+      savannah: -1,
+      cave: 0.4,
+      desert: -1,
+      rainforest: 0.4,
+      grassland: -0.4
+    }
   },
 }
 
 const legInfo = {
   0: {
     info: 'Information about the leg attribute for the Webbed legs',
-    pros: 'Some Pro about the trait',
-    cons: 'Some Con about the trait'
+    pros: 'Swim faster',
+    cons: 'Slow running',
+    habitatScores: {
+      arctic: 0.7,
+      swamp: 0.9,
+      ocean: 1,
+      mountain: -1,
+      temperateForest: -0.6,
+      savannah: -1,
+      cave: -0.7,
+      desert: -1,
+      rainforest: 0,
+      grassland: -0.4
+    }
   },
   1: {
     info: 'Information about the leg attribute for the Tapered legs',
-    pros: 'Some Pro about the trait',
-    cons: 'Some Con about the trait'
+    pros: 'Gripping food\nClimbing trees',
+    cons: 'Limited digging\nLimited hunting',
+    habitatScores: {
+      arctic: -0.8,
+      swamp: 0.3,
+      ocean: -1,
+      mountain: 0.7,
+      temperateForest: 0.5,
+      savannah: -0.6,
+      cave: 0.2,
+      desert: -1,
+      rainforest: 1,
+      grassland: -0.4
+    }
   },
   2: {
     info: 'Information about the leg attribute for the Claw legs',
-    pros: 'Some Pro about the trait',
-    cons: 'Some Con about the trait'
+    pros: 'Better Hunting\nBetter Climbing',
+    cons: 'Can’t hold materials\nNot strong swimmers',
+    habitatScores: {
+      arctic: 0.7,
+      swamp: 0.5,
+      ocean: -1,
+      mountain: 0.4,
+      temperateForest: 0.6,
+      savannah: 1,
+      cave: -0.6,
+      desert: 1,
+      rainforest: 0.7,
+      grassland: 0.7
+    }
   },
   3: {
     info: 'Information about the leg attribute for the Nailed legs',
-    pros: 'Some Pro about the trait',
-    cons: 'Some Con about the trait'
+    pros: 'Better Digging\nBetter Hunting',
+    cons: 'No Climbing',
+    habitatScores: {
+      arctic: -0.9,
+      swamp: 0.1,
+      ocean: -0.7,
+      mountain: -1,
+      temperateForest: 0.6,
+      savannah: 0.5,
+      cave: -1,
+      desert: -0.6,
+      rainforest: 1,
+      grassland: -0.4
+    }
   },
   4: {
     info: 'Information about the leg attribute for the Paddle legs',
-    pros: 'Some Pro about the trait',
-    cons: 'Some Con about the trait'
+    pros: 'Strong swimmers',
+    cons: 'Limited hunting\nNo climbing\nNo digging',
+    habitatScores: {
+      arctic: 0.7,
+      swamp: 0.9,
+      ocean: 1,
+      mountain: -1,
+      temperateForest: -0.6,
+      savannah: -1,
+      cave: -1,
+      desert: -1,
+      rainforest: 0.4,
+      grassland: -1
+    }
   }
 }
 
@@ -126,4 +395,4 @@ const habitatInfo = {
   }
 }
 
-module.exports = { bodyInfo, headInfo, legInfo, habitatInfo}
+module.exports = { bodyInfo, headInfo, legInfo, habitatInfo, earInfo, mouthInfo}

@@ -1,12 +1,9 @@
 import { useState } from "react";
-import axios from 'axios';
 import './speciesCreator.scss'
-import { useNavigate } from "react-router-dom";
 
 const LeftArrow = require('../../assets/simulationAssets/leftarrow.png');
 const RightArrow = require('../../assets/simulationAssets/rightarrow.png');
 
-const apiURL = 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/saveSpecies';
 
 const smallEyes = require('../../assets/simulationAssets/bodyAssets/smallEyes.png');
 const noEyes = require('../../assets/simulationAssets/bodyAssets/noEyes.png');
@@ -34,16 +31,14 @@ const baseImage = require('../../assets/simulationAssets/bodyAssets/baseImage.pn
 function SpeciesCreator({
   headIndex, setHeadIndex, bodyIndex, setBodyIndex,
   legIndex, setLegIndex, mouthIndex, setMouthIndex,
-  earIndex, setEarIndex, key
+  earIndex, setEarIndex, key, name, setName
 }) {
   
-  const navigate = useNavigate();
   const heads = [smallEyes, noEyes, bigEyes];
   const bodies = [bareBody, hairBody, featherBody, scaleBody];
   const legs = [webbedHand, taperedHand, clawHand, nailedHand, paddleHand];
   const mouths = [balineMouth, beakMouth, sharpTeethMouth, longTongueMouth];
   const ears = [cuppedEar, smallEar, noEar];
-  const [name, setName] = useState('');
 
   const [currentHead, setCurrentHead] = useState(heads[headIndex]);
   const [currentBody, setCurrentBody] = useState(bodies[bodyIndex]);
@@ -138,30 +133,6 @@ function SpeciesCreator({
     }
   }
 
-  const handleSave = async () => {
-    const result = await axios.post(apiURL, {
-      body: bodyIndex,
-      head: headIndex,
-      legs: legIndex,
-      mouth: mouthIndex,
-      ear: earIndex,
-      name: name
-    });
-
-    return result.data.speciesId
-  }
-
-  const handleNext = async () => {
-    const speciesId = await handleSave();
-    navigate(`/habitatSelection`, {state: { headIndex: headIndex,
-                                            bodyIndex: bodyIndex,
-                                            legIndex: legIndex,
-                                            mouthIndex: mouthIndex,
-                                            earIndex: earIndex,
-                                            speciesId: speciesId
-                                          }})
-  }
-
   const handleNameChange = (event) => {
     setName(event.target.value);
   }
@@ -212,14 +183,6 @@ function SpeciesCreator({
         <label>Species Name</label> 
         <input type="text" value={name} onChange={(text) => handleNameChange(text)} />
       </form>
-      <div className="interact-box">
-        <div className="save" onClick={() => handleSave()}>
-          <h2>Save</h2>
-        </div>
-        <div className="save" onClick={() => handleNext()}>
-          <h2>Next</h2>
-        </div>
-      </div>
     </div>
   );
 }

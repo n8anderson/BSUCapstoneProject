@@ -1,5 +1,5 @@
 .simulation-screen {
-  height: 100vh;
+  height: fit-content;
   overflow-x: hidden;
   position: relative;
 
@@ -16,39 +16,59 @@
     margin: auto;
   }
 
-  .infobox-head {
+  .left-info {
+    flex-direction: column;
     position: absolute;
-    border: solid;
-    height: 20vh;
-    width: 18vw;
-    top: 20%;
-    margin-left: 10px;
+    top: 20vh;
+    .infobox-head {
+      border: solid;
+      height: fit-content;
+      width: 18vw;
+      margin-left: 10px;
+      margin-bottom: 15px;
+    }
+    .infobox-leg {
+      border: solid;
+      height: fit-content;
+      width: 18vw;
+      margin-left: 10px;
+      margin-bottom: 15px;
+    }
+    .infobox-mouth {
+      border: solid;
+      height: fit-content;
+      width: 18vw;
+      margin-left: 10px;
+      margin-bottom: 15px;
+    }
   }
-  .infobox-body {
+  .right-info {
     position: absolute;
-    border: solid;
-    height: 20vh;
-    width: 18vw;
-    top: 40%;
-    right: 10px;
-    margin-left: 10px;
-  }
-  .infobox-leg {
-    position: absolute;
-    border: solid;
-    height: 20vh;
-    width: 18vw;
-    bottom: 10%;
-    margin-left: 10px;
+    top: 30vh;
+    right: 1vw;
+    flex-direction: column;
+    .infobox-body {
+      border: solid;
+      height: fit-content;
+      width: 18vw;
+      margin-left: 10px;
+      margin-bottom: 15px;
+    }
+    .infobox-ear {
+      border: solid;
+      height: fit-content;
+      width: 18vw;
+      margin-left: 10px;
+      margin-bottom: 15px;
+    }
   }
 
   .load-species {
     position: absolute;
-    height: 20vh;
+    height: fit-content;
     width: 18vw;
     top: 15%;
     right: 20px;
-
     .load {
       height: 50px;
       border: solid;
@@ -59,5 +79,32 @@
       }
     }
   }
-
+  .interact-box {
+    position: absolute;
+    right: 2vw;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 325px;
+    height: fit-content;
+    bottom: -10vh;
+  
+    .save {
+      min-height: 5vh;
+      min-width: 150px;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+      border-radius: 5px;
+      background-color: whitesmoke;
+    }
+    .save:hover {
+      background-color: #732A19;
+      h2 {
+        color: white;
+      }
+    }
+    
+    .save:active {
+      background-color: #8B3F2D;
+      color: white;
+    }
+  }
 }
