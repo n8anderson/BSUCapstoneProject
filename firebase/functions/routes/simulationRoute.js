@@ -30,10 +30,13 @@ const saveSpecies = async (req) => {
 const updateSpecies = async (req) => {
   const {
     classID,
-    speciesId
+    speciesId,
+    habitat
   } = req.body
 
-  await getFirestore().collection('species').doc(speciesId).update({ classID })
+  console.log(habitat)
+
+  await getFirestore().collection('species').doc(speciesId).update({ classID, habitat })
     .then((res) => console.log(res))
 }
 
