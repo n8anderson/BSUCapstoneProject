@@ -14,6 +14,7 @@ import {
   Tooltip, ResponsiveContainer, Label, Line, ReferenceLine
 } from 'recharts';
 
+const emulatorsEnabled = false;
 
 function HabitatResults() {
 
@@ -78,7 +79,9 @@ function HabitatResults() {
   useEffect(() => {
     const getClassroomSpecies = async () => {
       if (classID) {
-        const url = `http://127.0.0.1:5001/bsu-directed-study/us-central1/api/room/getSpecies`
+        const url = emulatorsEnabled
+        ? `http://127.0.0.1:5001/bsu-directed-study/us-central1/api/room/getSpecies`
+        : 'https://us-central1-bsu-directed-study.cloudfunctions.net/api/room/getSpecies';
         const result = await axios.post(url, { roomID: classID })
         setClassroomSpecies(result.data.speciesInRoom)
       }

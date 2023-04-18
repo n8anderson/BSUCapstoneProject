@@ -9,8 +9,6 @@ import { habitatInfo } from '../../hooks/info-helper';
 import axios from 'axios';
 import Modal from 'react-modal';
 
-const apiURL = 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/getRoom';
-
 const smallEyes = require('../../assets/simulationAssets/bodyAssets/smallEyes.png');
 const noEyes = require('../../assets/simulationAssets/bodyAssets/noEyes.png');
 const bigEyes = require('../../assets/simulationAssets/bodyAssets/bigEyes.png');
@@ -33,7 +31,11 @@ const scaleBody = require('../../assets/simulationAssets/bodyAssets/scaleBody.pn
 
 const baseImage = require('../../assets/simulationAssets/bodyAssets/baseImage.png');
 
+const emulatorsEnabled = false;
 
+const apiURL = emulatorsEnabled
+? 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/getRoom'
+: 'https://us-central1-bsu-directed-study.cloudfunctions.net/api/room/getRoom';
 function HabitatSelection() {
   const location = useLocation();
   const navigate = useNavigate()
@@ -92,7 +94,9 @@ function HabitatSelection() {
   }, [className, studentID])
 
   const handleNext = async () => {
-    const url = `http://127.0.0.1:5001/bsu-directed-study/us-central1/api/species/update`
+    const url = emulatorsEnabled
+    ? `http://127.0.0.1:5001/bsu-directed-study/us-central1/api/species/update`
+    : 'https://us-central1-bsu-directed-study.cloudfunctions.net/api/species/update';
     await axios.post(url, { speciesId, classID, habitat: selectedHabitat })
     navigate(`/results`, {state: { headIndex: headIndex,
       bodyIndex: bodyIndex,

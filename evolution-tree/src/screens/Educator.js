@@ -9,9 +9,13 @@ import axios from 'axios';
 import { habitatInfo } from '../hooks/info-helper';
 import HabitatSelectionButton from '../components/habitatSelectionButton';
 
+const emulatorsEnabled = false;
+
 function Educator() {
 
-  const apiURL = 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/createRoom';
+  const apiURL = emulatorsEnabled
+  ? 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/createRoom'
+  : 'https://us-central1-bsu-directed-study.cloudfunctions.net/api/createRoom';
 
 
   const [modalVisible, setModalVisible] = useState(false);

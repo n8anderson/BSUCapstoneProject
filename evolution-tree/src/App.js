@@ -24,12 +24,10 @@ import * as firebase from 'firebase/app';
 import HabitatSelection from './screens/simulation/HabitatSelection';
 import Classroom from './screens/simulation/Classroom';
 import HabitatResults from './screens/simulation/ResultsForHabitat';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+// Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const emulatorsEnabled = true;
+const emulatorsEnabled = false;
 const firebaseConfig = emulatorsEnabled ? 
 {
   apiKey: "AIzaSyCFAtoMg1YNQIDlJrS76hQe0qPVMjq449M",

@@ -9,8 +9,10 @@ import { bodyInfo, headInfo, legInfo, mouthInfo, earInfo } from '../../hooks/inf
 import axios from 'axios';
 import Select from "react-dropdown-select";
 
-const apiURL = 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/getSpecies';
-
+const emulatorsEnabled = false;
+const apiURL = emulatorsEnabled
+? `http://127.0.0.1:5001/bsu-directed-study/us-central1/api/getSpecies`
+: 'https://us-central1-bsu-directed-study.cloudfunctions.net/api/getSpecies';
 function Simulation() {
   const navigate = useNavigate();
   const [headIndex, setHeadIndex] = useState(0);
@@ -41,7 +43,9 @@ function Simulation() {
   };
 
   const handleSave = async () => {
-    const saveUrl = 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/saveSpecies'
+    const saveUrl = emulatorsEnabled
+    ? `http://127.0.0.1:5001/bsu-directed-study/us-central1/api/saveSpecies`
+    : 'https://us-central1-bsu-directed-study.cloudfunctions.net/api/saveSpecies';
     const result = await axios.post(saveUrl, {
       body: bodyIndex,
       head: headIndex,
