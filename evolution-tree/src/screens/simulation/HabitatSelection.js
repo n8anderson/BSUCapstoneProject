@@ -35,7 +35,7 @@ const emulatorsEnabled = false;
 
 const apiURL = emulatorsEnabled
 ? 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/getRoom'
-: 'https://us-central1-bsu-directed-study.cloudfunctions.net/api/room/getRoom';
+: 'https://us-central1-bsu-directed-study.cloudfunctions.net/api/getRoom';
 function HabitatSelection() {
   const location = useLocation();
   const navigate = useNavigate()
@@ -145,7 +145,9 @@ function HabitatSelection() {
   };
 
   const saveStudentName = async () => {
-    const studentURL = 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/student';
+    const studentURL = emulatorsEnabled
+    ? `http://127.0.0.1:5001/bsu-directed-study/us-central1/api/student`
+    : 'https://us-central1-bsu-directed-study.cloudfunctions.net/api/student';
     const result = await axios.post(studentURL, {
       roomID: classID,
       speciesId: speciesId,
