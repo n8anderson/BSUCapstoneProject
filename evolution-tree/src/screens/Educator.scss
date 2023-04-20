@@ -57,17 +57,16 @@
     margin-right: 25px;
     margin-top: 10px;
     border-radius: 5px;
-    grid-row: 2 / 7;
+    grid-row: 2 / 9;
     align-items: left;
     border-radius: 5px;
     background-color: #ba602e;
 
     .linking {
       width: fit-content;
-      margin-left: 25px;
-      border-bottom: solid;
+      margin-left: 5%;
 
-      a, a:hover, a:focus, a:active {
+      p {
         width: fit-content;
         font-size: 25px;
         font-weight: 700;
@@ -77,6 +76,62 @@
       }
     }
 
+    .lesson-plan-content {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+
+      .quick-step {
+        width: 60%;
+        margin-left: 5%;
+        
+        h2 {
+          color: #FFFFFF
+        }
+
+        li {
+          text-align: left;
+          padding-left: 15px;
+          color: #FFFFFF;
+          font-weight: 400;
+          font-size: 28px;
+        }
+      }
+
+      .content-container {
+        display: flex;
+        flex-direction: column;
+        margin-left: 15%;
+        margin-right: 25px;
+
+        .lesson-preview{
+          width: 100%;
+          margin-bottom: 20px;
+        }
+
+        .activity-button {
+          align-self: center;
+          min-height: 2vh;
+          min-width: 150px;
+          max-width: 250px;
+          right: 0px;
+          box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+          border-radius: 5px;
+          background-color: whitesmoke;
+        }
+        .activity-button:hover {
+          background-color: #732A19;
+          h2 {
+            color: white;
+          }
+        }
+          
+        .activity-button:active {
+          background-color: #8B3F2D;
+          color: white;
+        }
+      }
+    }
 
   }
 
@@ -86,33 +141,44 @@
     margin-right: 25px;
     margin-top: 10px;
     border-radius: 5px;
-    grid-row: 7 / 11;
+    grid-row: 9 / 13;
     align-items: left;
     border-radius: 5px;
     background-color: #ba602e;
 
+    
+    .activity-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
 
-    .activity-button {
-      min-height: 5vh;
-      min-width: 150px;
-      max-width: 150px;
-      margin-left: 15%;
-      padding: 5px;
-      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
-      border-radius: 5px;
-      background-color: whitesmoke;
-    }
-    .activity-button:hover {
-      background-color: #732A19;
-      h2 {
+      .material-button {
+        text-decoration: none;
+        color: #000000;
+        display: block;
+        min-height: 5vh;
+        min-width: 150px;
+        max-width: 150px;
+        padding: 5px;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+        border-radius: 5px;
+        background-color: whitesmoke;
+        margin-bottom: 15px;
+      }
+      .material-button:hover {
+        background-color: #732A19;
+        h2 {
+          color: white;
+        }
+      }
+        
+      .material-button:active {
+        background-color: #8B3F2D;
         color: white;
       }
     }
-      
-    .activity-button:active {
-      background-color: #8B3F2D;
-      color: white;
-    }
+
   }
 
 }

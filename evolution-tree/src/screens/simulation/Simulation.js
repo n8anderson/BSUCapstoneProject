@@ -75,104 +75,107 @@ function Simulation() {
       <div className="back-button-container">
         <BackButton />
       </div>
-      <div className="species-creator">
-        <SpeciesCreator
-          headIndex={headIndex}
-          setHeadIndex={setHeadIndex}
-          bodyIndex={bodyIndex}
-          setBodyIndex={setBodyIndex}
-          legIndex={legIndex}
-          setLegIndex={setLegIndex}
-          earIndex={earIndex}
-          setEarIndex={setEarIndex}
-          mouthIndex={mouthIndex}
-          setMouthIndex={setMouthIndex}
-          key={`${headIndex}${bodyIndex}${legIndex}${earIndex}${mouthIndex}`}
-          name={name}
-          setName={setName}
-        />
+      <div className="creator-content">
+        <div className="left-info">
+          <div className="infobox-head">
+            <h3>Eye Attribute:</h3>
+            <p className="bold">{headInfo[headIndex].info}</p>
+            <p><b>Pros:</b></p>
+            {headInfo[headIndex].pros.split('\n').map((value) => (
+              <p>{value}</p>
+            ))}
+            <p><b>Cons:</b></p>
+            {headInfo[headIndex].cons.split('\n').map((value) => (
+              <p>{value}</p>
+            ))}
+          </div>
+          <div className="infobox-leg">
+            <h3>Hands/Feet Attribute:</h3>
+            <p className="bold">{legInfo[legIndex].info}</p>
+            <p><b>Pros:</b></p>
+            {legInfo[legIndex].pros.split('\n').map((value) => (
+              <p>{value}</p>
+            ))}
+            <p><b>Cons:</b></p>
+            {legInfo[legIndex].cons.split('\n').map((value) => (
+              <p>{value}</p>
+            ))}
+          </div>
+          <div className="infobox-mouth">
+            <h3>Mouth Attribute:</h3>
+            <p className="bold">{mouthInfo[mouthIndex].info}</p>
+            <p><b>Pros:</b></p>
+            {mouthInfo[mouthIndex].pros.split('\n').map((value) => (
+              <p>{value}</p>
+            ))}
+            <p><b>Cons:</b></p>
+            {mouthInfo[mouthIndex].cons.split('\n').map((value) => (
+              <p>{value}</p>
+            ))}
+          </div>
+        </div>
+        <div className="species-creator">
+          <SpeciesCreator
+            headIndex={headIndex}
+            setHeadIndex={setHeadIndex}
+            bodyIndex={bodyIndex}
+            setBodyIndex={setBodyIndex}
+            legIndex={legIndex}
+            setLegIndex={setLegIndex}
+            earIndex={earIndex}
+            setEarIndex={setEarIndex}
+            mouthIndex={mouthIndex}
+            setMouthIndex={setMouthIndex}
+            key={`${headIndex}${bodyIndex}${legIndex}${earIndex}${mouthIndex}`}
+            name={name}
+            setName={setName}
+          />
+        </div>
+        <div className="right-info">
+          <div className="load-species">
+            <Select 
+              options={options}
+              onChange={(values) => setLoadedOption(savedSpecies[values[0].value])}
+            />
+            <div className="load" onClick={() => handleLoad()}>
+              <h3 className="header">Load</h3>
+            </div>
+          </div>
+          <div className="infobox-ear">
+            <h3>Ear Attribute:</h3>
+            <p className="bold">{earInfo[earIndex].info}</p>
+            <p><b>Pros:</b></p>
+            {earInfo[earIndex].pros.split('\n').map((value) => (
+              <p>{value}</p>
+            ))}
+            <p><b>Cons:</b></p>
+            {earInfo[earIndex].cons.split('\n').map((value) => (
+              <p>{value}</p>
+            ))}
+          </div>
+          <div className="infobox-body">
+            <h3>Body Attribute:</h3>
+            <p className="bold">{bodyInfo[bodyIndex].info}</p>
+            <p><b>Pros:</b></p>
+            {bodyInfo[bodyIndex].pros.split('\n').map((value) => (
+              <p>{value}</p>
+            ))}
+            <p><b>Cons:</b></p>
+            {bodyInfo[bodyIndex].cons.split('\n').map((value) => (
+              <p>{value}</p>
+            ))}
+          </div>
+          <div className="interact-box">
+            <div className="save" onClick={() => handleSave()}>
+              <h2>Save</h2>
+            </div>
+            <div className="save" onClick={() => handleNext()}>
+              <h2>Next</h2>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="left-info">
-        <div className="infobox-head">
-          <h3>Eye Attribute</h3>
-          <p>{headInfo[headIndex].info}</p>
-          <p><b>Pros:</b></p>
-          {headInfo[headIndex].pros.split('\n').map((value) => (
-            <p>{value}</p>
-          ))}
-          <p><b>Cons:</b></p>
-          {headInfo[headIndex].cons.split('\n').map((value) => (
-            <p>{value}</p>
-          ))}
-        </div>
-        <div className="infobox-leg">
-          <h3>Hands/Feet Attribute</h3>
-          <p>{legInfo[legIndex].info}</p>
-          <p><b>Pros:</b></p>
-          {legInfo[legIndex].pros.split('\n').map((value) => (
-            <p>{value}</p>
-          ))}
-          <p><b>Cons:</b></p>
-          {legInfo[legIndex].cons.split('\n').map((value) => (
-            <p>{value}</p>
-          ))}
-        </div>
-        <div className="infobox-mouth">
-          <h3>Mouth Attribute</h3>
-          <p>{mouthInfo[mouthIndex].info}</p>
-          <p><b>Pros:</b></p>
-          {mouthInfo[mouthIndex].pros.split('\n').map((value) => (
-            <p>{value}</p>
-          ))}
-          <p><b>Cons:</b></p>
-          {mouthInfo[mouthIndex].cons.split('\n').map((value) => (
-            <p>{value}</p>
-          ))}
-        </div>
-      </div>
-      <div className="right-info">
-        <div className="infobox-ear">
-          <h3>Ear Attribute</h3>
-          <p>{earInfo[earIndex].info}</p>
-          <p><b>Pros:</b></p>
-          {earInfo[earIndex].pros.split('\n').map((value) => (
-            <p>{value}</p>
-          ))}
-          <p><b>Cons:</b></p>
-          {earInfo[earIndex].cons.split('\n').map((value) => (
-            <p>{value}</p>
-          ))}
-        </div>
-        <div className="infobox-body">
-          <h3>Body Attribute</h3>
-          <p>{bodyInfo[bodyIndex].info}</p>
-          <p><b>Pros:</b></p>
-          {bodyInfo[bodyIndex].pros.split('\n').map((value) => (
-            <p>{value}</p>
-          ))}
-          <p><b>Cons:</b></p>
-          {bodyInfo[bodyIndex].cons.split('\n').map((value) => (
-            <p>{value}</p>
-          ))}
-        </div>
-      </div>
-      <div className="load-species">
-        <Select 
-          options={options}
-          onChange={(values) => setLoadedOption(savedSpecies[values[0].value])}
-        />
-        <div className="load" onClick={() => handleLoad()}>
-          <h3 className="header">Load</h3>
-        </div>
-      </div>
-      <div className="interact-box">
-        <div className="save" onClick={() => handleSave()}>
-          <h2>Save</h2>
-        </div>
-        <div className="save" onClick={() => handleNext()}>
-          <h2>Next</h2>
-        </div>
-      </div>
+
     </motion.div>
   )
 }

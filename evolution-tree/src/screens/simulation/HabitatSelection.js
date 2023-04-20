@@ -82,7 +82,7 @@ function HabitatSelection() {
   const heads = [smallEyes, noEyes, bigEyes];
   const bodies = [bareBody, hairBody, featherBody, scaleBody];
   const legs = [webbedHand, taperedHand, clawHand, nailedHand, paddleHand];
-  const mouths = [balineMouth, beakMouth, sharpTeethMouth, longTongueMouth];
+  const mouths = [beakMouth, balineMouth, sharpTeethMouth, longTongueMouth];
   const ears = [cuppedEar, smallEar, noEar];
 
   const [classOptions, setClassOptions] = useState(null);
@@ -173,6 +173,8 @@ function HabitatSelection() {
     </div>
   );
 
+
+
   return (
     <motion.div className="simulation-screen">
       <Modal
@@ -194,15 +196,55 @@ function HabitatSelection() {
           <div className="habitat-box">
             <h3>{habitatInfo[selectedHabitat].name}</h3>
             {habitatInfo[selectedHabitat].bodyText.split('\n').map((value) => (
-              <p>{value}</p>
+              <p
+                key={value}
+              >
+                {value}
+              </p>
             ))}
+            {habitatInfo[selectedHabitat].citation.split('\n').map((value, index) => (
             <a
               className="citation"
-              href={habitatInfo[selectedHabitat].citation}
+              href={value}
+              key={value}
             >
               Citation
+              {
+                habitatInfo[selectedHabitat].citation.split('\n').length > 1
+                  ? ` ${index + 1}`
+                  : null
+              }
             </a>
+            ))}
           </div>
+          { !classID && (
+            <>
+              <div className="common-character-box">
+                <h3>Common Characters:</h3>
+                <ul>
+                  {habitatInfo[selectedHabitat].commonCharacters.split(',').map((value) => (
+                    <li>
+                      {value}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="common-animal-box">
+                  <h3>Model Animals:</h3>
+                  <div className="image-container">
+                    {habitatInfo[selectedHabitat].commonAnimals.map((value) => (
+                      <div className="content">
+                        <img
+                          alt={value.name}
+                          src={require(`../../assets/simulationAssets/commonAnimals/${value.src}`)}
+                        />
+                        <p>{value.name}</p>
+                      </div>
+                    ))}
+                  </div>
+              </div>
+            </>
+          )}
           <div className="species-view">
             {
               className

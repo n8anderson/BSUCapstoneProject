@@ -37,7 +37,7 @@ function SpeciesCreator({
   const heads = [smallEyes, noEyes, bigEyes];
   const bodies = [bareBody, hairBody, featherBody, scaleBody];
   const legs = [webbedHand, taperedHand, clawHand, nailedHand, paddleHand];
-  const mouths = [balineMouth, beakMouth, sharpTeethMouth, longTongueMouth];
+  const mouths = [beakMouth, balineMouth, sharpTeethMouth, longTongueMouth];
   const ears = [cuppedEar, smallEar, noEar];
 
   const [currentHead, setCurrentHead] = useState(heads[headIndex]);

@@ -14,8 +14,36 @@
   grid-column: 3 / 7;
   grid-row: 1 / 8;
   min-height: 80vh;
+  display: flex;
+  justify-content: center;
 
-  padding: 25px;
+  .image-container {
+    display: flex;
+    max-width: fit-content;
+    background-color: #8B3F2D;
+    align-self: center;
+  
+    margin-top: 25px;
+    .head {
+      position: absolute;
+    }
+  
+    .body {
+      position: absolute;
+    }
+  
+    .legs {
+      position: absolute;
+    }
+  
+    .ear {
+      position: absolute;
+    }
+  
+    .mouth {
+      position: absolute;
+    }
+  }
 }
 
 .character-head-left {
@@ -100,37 +128,6 @@
   max-width: 100%;
 }
 
-.image-container {
-  background-color: #8B3F2D;
-  grid-column: 3 / 7;
-  grid-row: 1 / 8;
-
-  margin-top: 25px;
-  .head {
-    margin-left: -31%;
-    position: absolute;
-  }
-
-  .body {
-    margin-left: -31.3%;
-    position: absolute;
-  }
-
-  .legs {
-    margin-left: -31.3%;
-    position: absolute;
-  }
-
-  .ear {
-    margin-left: -31.3%;
-    position: absolute;
-  }
-
-  .mouth {
-    margin-left: -31.3%;
-    position: absolute;
-  }
-}
 
 .namebox {
   grid-column: 3 / 7;

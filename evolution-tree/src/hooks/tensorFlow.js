@@ -4,23 +4,14 @@ import { OPTIMIZERS } from './optimizers';
 export function generateData() {
   const input = [];
   const label = [];
-  for (let i = 0; i < 100; i++) {
-    let value = Math.random() * 99 + 1;
-    value *= Math.round(Math.random()) ? 1 : -1;
-    input.push(parseFloat(value) / 100.0);
-    
-    if (input[i] > 0.5) {
-      label.push(1);
-    } else if (input[i] >= -0.5 && input[i] <= 0.5) {
-      label.push(0);
-    } else {
-      label.push(-1);
-    }
+  for (let i = 0; i < 10000; i++) {
+    let value = Math.floor(Math.random() * 15);
+    input.push(value);
+    label.push(parseFloat(value) / 15)
   }
 
-  console.log(label);
-  const tfInput = tf.tensor(input, [100, 1]);
-  const tfLabel = tf.tensor(label, [100, 1]);
+  const tfInput = tf.tensor(input, [10000, 1]);
+  const tfLabel = tf.tensor(label, [10000, 1]);
 
   return [tfInput, tfLabel];
 }
@@ -28,7 +19,7 @@ export function generateData() {
 export function createModel(
   units=1,
   learningRate=0.01,
-  optimizer="adam"
+  optimizer="momentum"
 ) {
   const selectOptimizer = (optimizer) => {
     return OPTIMIZERS[optimizer].fn(learningRate);
@@ -37,11 +28,11 @@ export function createModel(
   model.add(tf.layers.dense({units, inputShape: [1] }));
   model.compile({
     optimizer: selectOptimizer(optimizer),
-    loss: "meanSquaredError"
+    loss: "meanAbsoluteError"
   })
   return model;
 }
 
-export async function trainModel(model, input, label, epochs = 150) {
+export async function trainModel(model, input, label, epochs = 500) {
   await model.fit(input, label, { epochs });
 }

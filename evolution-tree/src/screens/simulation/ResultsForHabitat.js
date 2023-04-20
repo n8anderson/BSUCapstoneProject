@@ -67,9 +67,12 @@ function HabitatResults() {
   useEffect(() => {
     if (readyModel && scoreTotal) {
       const predictScore = async () => {
-      console.log(1.0 / scoreTotal);
-      const result = await readyModel.predict(tf.tensor([1.0 / scoreTotal], [1, 1]));
-      setPredictedScore(await result.data());
+      console.log('score total:', scoreTotal);
+      const result = await readyModel.predict(tf.tensor([scoreTotal], [1, 1]));
+      const data = Math.abs(await result.data())
+      const parsedData = (data / Math.ceil(data))
+      console.log('PARSED DATA', data)
+      setPredictedScore(parsedData);
       }
       predictScore();
     }
@@ -120,7 +123,7 @@ function HabitatResults() {
                   }}
                 >
                   <CartesianGrid />
-                  <XAxis type="number" dataKey="x" name="Student Score" ticks={[-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]} domain={[-5,5]}>
+                  <XAxis type="number" dataKey="x" name="Student Score" ticks={[...Array(16).keys()]} domain={[0,15]}>
                     <Label value="Raw Student Score" position='bottom' offset={15}/>
                   </XAxis>
                   <YAxis type="number" dataKey="y" name="Predicted Score">
@@ -128,8 +131,8 @@ function HabitatResults() {
                   </YAxis>
                   <Tooltip cursor={{ strokeDasharray: '7 7' }} />
                   <Scatter name="Predicted Score for Species" data={studentCoordinates} fill="#8884d8" />
-                  <Line data={[{x: 0, y: 0}, {x: 5, y: 0.85}]} label="line" dot={false} dataKey="y" stroke="red"/>
-                  <Line data={[{x: 2.5, y: 0}, {x: 2.5, y: 1}]} label="line" dot={false} dataKey="y" stroke="blue"/>
+                  <Line data={[{x: 0, y: 0.25}, {x: 15, y: 0.85}]} label="line" dot={false} dataKey="y" stroke="red"/>
+                  <Line data={[{x: 7.5, y: 0}, {x: 7.5, y: 1}]} label="line" dot={false} dataKey="y" stroke="blue"/>
                   <ReferenceLine y={0} stroke="#000000" />
                   <ReferenceLine x={0} stroke="#000000" />
                   <ReferenceLine

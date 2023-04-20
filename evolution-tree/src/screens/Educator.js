@@ -11,6 +11,8 @@ import HabitatSelectionButton from '../components/habitatSelectionButton';
 
 const emulatorsEnabled = false;
 
+const lessonPreview = require('../assets/simulationAssets/lessonPreview.png');
+
 function Educator() {
 
   const apiURL = emulatorsEnabled
@@ -122,6 +124,22 @@ function Educator() {
     )
   };
 
+  // Fix download
+  const onDownloadClick = () => {
+    // using Java Script method to get PDF file
+    fetch('Simulation-LessonPlan.docx').then(response => {
+        response.blob().then(blob => {
+            // Creating new object of PDF file
+            const fileURL = window.URL.createObjectURL(blob);
+            // Setting various property values
+            let alink = document.createElement('a');
+            alink.href = fileURL;
+            alink.download = '../assets/simulationAssets/Simulation-LessonPlan.docx';
+            alink.click();
+        })
+    })
+  }
+
 
   return (
     <motion.div
@@ -195,18 +213,52 @@ function Educator() {
         </div>
         <div className="lesson-plan">
           <div className="linking">
-            <a
-              href="https://google.com"
-            >
+            <p>
               Lesson Plan
-            </a>
-            <i class="fas fa-link"></i>
+            </p>
+          </div>
+          <div className="lesson-plan-content">
+            <div className="quick-step">
+              <h2>Quick Start</h2>
+              <ol>
+                <li>Assign Warmup</li>
+                <li>Present your evolutionary powerpoint</li>
+                <li>Assign simulation worksheet</li>
+                <li>Assign your habitats (on this screen)</li>
+                <li>Students create their organism</li>
+                <li>Review and discuss results</li>
+                <li>Repeat steps 4 - 6 for habitats not "complete"</li>
+                <li>Record completion of students</li>
+                <li>Assign exit ticket</li>
+              </ol>
+            </div>
+            <div className="content-container">
+              <img
+                alt="Lesson plan preview"
+                src={lessonPreview}
+                className="lesson-preview"
+              />
+              <div className="activity-button" onClick={onDownloadClick}>
+                <h2>Download Entire Lesson Plan</h2>
+              </div>
+            </div>
           </div>
         </div>
         <div className="activities">
-          <h1>Activities</h1>
-          <div className="activity-button" onClick={() => setModalVisible(true)}>
-            <h2>Simulation Activity</h2>
+          <h1>Lesson Plan Materials</h1>
+          <div className="activity-container">
+            <a className="material-button" href="https://forms.gle/AJyQVcVH5W7E7CpZ6">
+              <h2>Warmup</h2>
+            </a>
+            <a className="material-button" href="https://forms.gle/AJyQVcVH5W7E7CpZ6">
+              <h2>Simulation Activity Worksheet</h2>
+            </a>
+            <div className="material-button" onClick={() => setModalVisible(true)}>
+              <h2>Simulation Activity</h2>
+            </div>
+            <a className="material-button" href="https://forms.gle/LmaY5yJgbPCr1Fjq6">
+              <h2>Exit Ticket</h2>
+            </a>
           </div>
         </div>
       </div>
