@@ -117,7 +117,7 @@ function HabitatSelection() {
     borderRadius: 5,
     marginTop: 25,
     position: 'absolute',
-    top: '25%',
+    top: '28%',
     right: 100
   };
 
@@ -217,34 +217,6 @@ function HabitatSelection() {
             </a>
             ))}
           </div>
-          { !classID && (
-            <>
-              <div className="common-character-box">
-                <h3>Common Characters:</h3>
-                <ul>
-                  {habitatInfo[selectedHabitat].commonCharacters.split(',').map((value) => (
-                    <li>
-                      {value}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="common-animal-box">
-                  <h3>Model Animals:</h3>
-                  <div className="image-container">
-                    {habitatInfo[selectedHabitat].commonAnimals.map((value) => (
-                      <div className="content">
-                        <img
-                          alt={value.name}
-                          src={require(`../../assets/simulationAssets/commonAnimals/${value.src}`)}
-                        />
-                        <p>{value.name}</p>
-                      </div>
-                    ))}
-                  </div>
-              </div>
-            </>
-          )}
           <div className="species-view">
             {
               className
@@ -282,6 +254,34 @@ function HabitatSelection() {
               </div>
             </div>
           </div>
+          { !classID && (
+            <div className="common-container">
+              <div className="common-character-box">
+                <h3>Common Characters:</h3>
+                <ul>
+                  {habitatInfo[selectedHabitat].commonCharacters.split(',').map((value) => (
+                    <li>
+                      {value}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="common-animal-box">
+                  <h3>Model Animals:</h3>
+                  <div className="image-container">
+                    {habitatInfo[selectedHabitat].commonAnimals.map((value) => (
+                      <div className="content">
+                        <img
+                          alt={value.name}
+                          src={require(`../../assets/simulationAssets/commonAnimals/${value.src}`)}
+                        />
+                        <p>{value.name}</p>
+                      </div>
+                    ))}
+                  </div>
+              </div>
+            </div>
+          )}
           <Select 
             options={classOptions || options}
             onChange={(values) => setSelectedHabitat(values[0].value)}
