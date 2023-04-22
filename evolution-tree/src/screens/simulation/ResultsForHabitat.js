@@ -4,7 +4,7 @@ import NavigationBar from '../../components/navigationBar';
 import BackButton from "../../components/backButton";
 import './ResultsForHabitat.scss';
 import * as tf from '@tensorflow/tfjs';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from 'react-router-dom';
 import { legInfo, headInfo, mouthInfo, earInfo, bodyInfo } from '../../hooks/info-helper';
 import axios from "axios";
@@ -22,6 +22,9 @@ function HabitatResults() {
   const [classroomSpecies, setClassroomSpecies] = useState([]);
   const [readyModel, setReadyModel] = useState(null);
   const [predictedScore, setPredictedScore] = useState(null);
+
+  const isPredicting = useRef(false);
+  const isTraining = useRef(false);
 
   const {
     headIndex,
@@ -43,36 +46,37 @@ function HabitatResults() {
     mouthInfo[mouthIndex].habitatScores[habitat],
   ]
 
-  console.log(allScores);
-
   const scoreTotal = allScores.reduce((acc, score) => (
     acc + score
   ), 0);
 
-  console.log(scoreTotal);
-
-
   useEffect(() => {
-    if (!readyModel) {
+    if (!isTraining.current) {
       const [input, label] = generateData();
       const model = createModel();
       const setupTraining = async () => {
-        await trainModel(model, input, label, 150)
-        .then((setReadyModel(model)));
+        await trainModel(model, input, label)
+        .then(() => {
+          isTraining.current = false;
+          setReadyModel(model);
+        })
+        .catch((err) => console.log(err));
       }
       setupTraining();
     }
-  }, [readyModel]);
+  }, []);
 
   useEffect(() => {
-    if (readyModel && scoreTotal) {
+    if (readyModel && scoreTotal != null && !isPredicting.current) {
+      isPredicting.current = true;
       const predictScore = async () => {
-      console.log('score total:', scoreTotal);
-      const result = await readyModel.predict(tf.tensor([scoreTotal], [1, 1]));
-      const data = Math.abs(await result.data())
-      const parsedData = (data / Math.ceil(data))
-      console.log('PARSED DATA', data)
-      setPredictedScore(parsedData);
+        const predictInput = Array(32).fill(0);
+        predictInput[0] = scoreTotal;
+        const reshapedInput = tf.tensor2d(predictInput, [1, 32]).reshape([-1, 1])
+        const result = await readyModel.predict(reshapedInput);
+        const data = Math.abs(await result.dataSync()[0])
+        setPredictedScore(data);
+        isPredicting.current = false;
       }
       predictScore();
     }
