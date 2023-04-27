@@ -31,7 +31,7 @@ const scaleBody = require('../../assets/simulationAssets/bodyAssets/scaleBody.pn
 
 const baseImage = require('../../assets/simulationAssets/bodyAssets/baseImage.png');
 
-const emulatorsEnabled = false;
+const emulatorsEnabled = true;
 
 const apiURL = emulatorsEnabled
 ? 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/getRoom'
@@ -105,7 +105,8 @@ function HabitatSelection() {
       earIndex: earIndex,
       speciesId: speciesId,
       classID: classID,
-      habitat: selectedHabitat
+      habitat: selectedHabitat,
+      classHabitats: classOptions?.map((habitat) => habitat.value) || [selectedHabitat]
     }})
   }
 
@@ -115,10 +116,20 @@ function HabitatSelection() {
     fontSize: 20,
     padding: 10,
     borderRadius: 5,
-    marginTop: 25,
+    position: 'absolute',
+    top: '22.5%',
+    right: 0
+  };
+
+  const modalButtonStyle = {
+    backgroundColor: 'black',
+    color: 'white',
+    fontSize: 20,
+    padding: 10,
+    borderRadius: 5,
     position: 'absolute',
     top: '28%',
-    right: 100
+    right: 20
   };
 
   const onConfirm = async () => {
@@ -165,7 +176,7 @@ function HabitatSelection() {
         <input type="text" onChange={(event) => setStudentAlias(event.target.value)} />
       </form>
       <button
-        style={buttonStyle}
+        style={modalButtonStyle}
         onClick={() => saveStudentName()}
       >
         Confirm
@@ -243,18 +254,13 @@ function HabitatSelection() {
               </div>
               <p>{name}</p>
             </div>
-            <div className="interact-box">
-              <div className="next" onClick={() => handleNext()}>
-                <h2>{className ? 'Start' : 'Next'}</h2>
-              </div>
-            </div>
             <div className="random-box">
               <div className="random" onClick={() => handleRandom()}>
                 <h2>Random</h2>
               </div>
             </div>
           </div>
-          { !classID && (
+          { !className && (
             <div className="common-container">
               <div className="common-character-box">
                 <h3>Common Characters:</h3>
@@ -282,6 +288,9 @@ function HabitatSelection() {
               </div>
             </div>
           )}
+          { className && (
+            <div className="common-container" />
+          )}
           <Select 
             options={classOptions || options}
             onChange={(values) => setSelectedHabitat(values[0].value)}
@@ -297,6 +306,11 @@ function HabitatSelection() {
           >
             Confirm
           </button>
+          <div className="interact-box">
+            <div className="next" onClick={() => handleNext()}>
+              <h2>{className ? 'Start' : 'Next'}</h2>
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>

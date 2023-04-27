@@ -31,12 +31,36 @@ const updateSpecies = async (req) => {
   const {
     classID,
     speciesId,
-    habitat
+    habitat,
+    coordinatesByHabitat
   } = req.body
 
-  console.log(habitat)
+  const updatedSpecies = {};
 
-  await getFirestore().collection('species').doc(speciesId).update({ classID, habitat })
+  const snapshot = await getFirestore().collection('species').doc(speciesId).get();
+
+  if (!speciesId) {
+    return;
+  }
+
+  if (classID) {
+    updatedSpecies.classID = classID;
+  }
+
+  if (habitat) {
+    updatedSpecies.habitat = habitat;
+  }
+
+  if (coordinatesByHabitat) {
+    updatedSpecies.coordinatesByHabitat = {
+      ...snapshot.data().coordinatesByHabitat,
+      ...coordinatesByHabitat
+    };
+  }
+
+  console.log("updated species:", updatedSpecies)
+
+  await getFirestore().collection('species').doc(speciesId).update(updatedSpecies)
     .then((res) => console.log(res))
 }
 
@@ -92,9 +116,13 @@ const getAllSpeciesInRoom = async (req) => {
 
   const snapshot = await getFirestore().collection('species').where('classID', '==', roomID).get()
 
-  const speciesInRoom = snapshot.docs.map((doc) => ({
-    speciesName: doc.data().name
-  }))
+  const speciesInRoom = snapshot.docs.map((doc) => {
+    console.log(doc.data())
+    return {
+    speciesName: doc.data().name,
+    coordinatesByHabitat: doc.data().coordinatesByHabitat,
+    speciesID: doc.id
+  }})
 
   return Promise.resolve({ speciesInRoom })
 }

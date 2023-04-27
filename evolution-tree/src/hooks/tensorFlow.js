@@ -6,8 +6,8 @@ export function generateData() {
   const label = [];
   for (let i = 0; i < 1000; i++) {
     let value = Math.floor(Math.random() * 15);
-    const min = value / 15 - 0.25
-    const max = value / 15 + 0.25 > 1 ? 1 : value / 15 + 0.25
+    const min = value > 10 ? value / 15 - 0.05 : value / 15 - 0.15
+    const max = value / 15 + 0.25 > 1 ? 1 : value / 15 + 0.15
     const randomLabel = Math.random() * (max - min) + min;
     input.push(value);
     label.push(randomLabel)

@@ -22,12 +22,11 @@ import Simulation from './screens/simulation/Simulation';
 // Import the functions you need from the SDKs you need
 import * as firebase from 'firebase/app';
 import HabitatSelection from './screens/simulation/HabitatSelection';
-import Classroom from './screens/simulation/Classroom';
 import HabitatResults from './screens/simulation/ResultsForHabitat';
 
 // Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const emulatorsEnabled = false;
+const emulatorsEnabled = true;
 const firebaseConfig = emulatorsEnabled ? 
 {
   apiKey: "AIzaSyCFAtoMg1YNQIDlJrS76hQe0qPVMjq449M",
@@ -57,7 +56,6 @@ function App() {
           <Route path='/simulation' element={<Simulation />} />
           <Route path='/habitatSelection' element={<HabitatSelection />} />
           <Route path='/results' element={<HabitatResults />} />
-          <Route path='/classroom' element={<Classroom />} />
           <Route path='/educator' element={<Educator />} />
           <Route path='/plant' element={<Plant />} />
           <Route path='/humming-bird' element={<HummingBird />} />
