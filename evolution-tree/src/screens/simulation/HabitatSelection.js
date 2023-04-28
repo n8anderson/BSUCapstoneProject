@@ -40,7 +40,19 @@ function HabitatSelection() {
   const location = useLocation();
   const navigate = useNavigate()
 
-  const [classID, setClassID] = useState(null);
+  const {
+    headIndex,
+    bodyIndex,
+    legIndex,
+    earIndex,
+    mouthIndex,
+    name,
+    savedSpeciesId,
+    savedClassId,
+    savedStudentId
+  } = location.state;
+
+  const [classID, setClassID] = useState(savedClassId || null);
   const [className, setClassName] = useState(null);
 
   const options = Object.entries(habitatInfo).map(([key, value]) => (
@@ -67,17 +79,7 @@ function HabitatSelection() {
   const [createStudentVisible, setCreateStudentVisible] = useState(false);
   const [studentAlias, setStudentAlias] = useState(null);
   const [teacherSelectedHabitats, setTeacherSelectedHabitats] = useState(false);
-  const [studentID, setStudentID] = useState(null);
-
-  const {
-    headIndex,
-    bodyIndex,
-    legIndex,
-    earIndex,
-    mouthIndex,
-    name,
-    speciesId
-  } = location.state;
+  const [studentID, setStudentID] = useState(savedStudentId || null);
 
   const heads = [smallEyes, noEyes, bigEyes];
   const bodies = [bareBody, hairBody, featherBody, scaleBody];
@@ -87,25 +89,21 @@ function HabitatSelection() {
 
   const [classOptions, setClassOptions] = useState(null);
 
-  useEffect(() => {
-    if (className && !studentID) {
-      setCreateStudentVisible(true);
-    }
-  }, [className, studentID])
-
   const handleNext = async () => {
     const url = emulatorsEnabled
     ? `http://127.0.0.1:5001/bsu-directed-study/us-central1/api/species/update`
     : 'https://us-central1-bsu-directed-study.cloudfunctions.net/api/species/update';
-    await axios.post(url, { speciesId, classID, habitat: selectedHabitat })
+    await axios.post(url, { speciesId: savedSpeciesId, classID, habitat: selectedHabitat })
     navigate(`/results`, {state: { headIndex: headIndex,
       bodyIndex: bodyIndex,
       legIndex: legIndex,
       mouthIndex: mouthIndex,
       earIndex: earIndex,
-      speciesId: speciesId,
+      speciesId: savedSpeciesId,
       classID: classID,
       habitat: selectedHabitat,
+      studentID: studentID,
+      name,
       classHabitats: classOptions?.map((habitat) => habitat.value) || [selectedHabitat]
     }})
   }
@@ -132,6 +130,23 @@ function HabitatSelection() {
     right: 20
   };
 
+
+  useEffect(() => {
+    const loadExistingClassInfo = async () => {
+      if (classID && options && !className) {
+        const loadedInfo = await axios.post(apiURL, {
+          roomID: classID
+        })
+        
+        const { selectedHabitats } = loadedInfo.data
+        setSelectedHabitat(selectedHabitats[0])
+        setTeacherSelectedHabitats(selectedHabitats)
+        setClassOptions(options.filter((option) => selectedHabitats.includes(option.value)))
+        setClassName(loadedInfo.data.className)
+      }
+    }
+    loadExistingClassInfo();
+  }, [classID, options, className])
   const onConfirm = async () => {
     if (!classID) {
       return
@@ -146,6 +161,7 @@ function HabitatSelection() {
     setTeacherSelectedHabitats(selectedHabitats)
     setClassOptions(options.filter((option) => selectedHabitats.includes(option.value)))
     setClassName(loadedInfo.data.className)
+    setCreateStudentVisible(true);
   }
 
   const handleRandom = () => {
@@ -161,7 +177,7 @@ function HabitatSelection() {
     : 'https://us-central1-bsu-directed-study.cloudfunctions.net/api/student';
     const result = await axios.post(studentURL, {
       roomID: classID,
-      speciesId: speciesId,
+      speciesId: savedSpeciesId,
       habitatsToComplete: teacherSelectedHabitats
     });
     setStudentID(result.data.studentId);

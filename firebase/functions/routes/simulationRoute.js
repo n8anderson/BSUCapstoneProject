@@ -10,8 +10,20 @@ const saveSpecies = async (req) => {
     legs,
     ear,
     mouth,
-    name
+    name,
+    savedSpeciesId
   } = req.body;
+  if (savedSpeciesId) {
+    await getFirestore().collection('species').doc(savedSpeciesId).update({
+      headIndex: head,
+      bodyIndex: body,
+      legsIndex: legs,
+      earIndex: ear,
+      mouthIndex: mouth,
+      name: name
+    })
+    return Promise.resolve({message: 'Success', savedSpeciesId});
+  }
   let speciesId = '';
   await getFirestore().collection('species').add({
       headIndex: head,
@@ -58,10 +70,9 @@ const updateSpecies = async (req) => {
     };
   }
 
-  console.log("updated species:", updatedSpecies)
 
   await getFirestore().collection('species').doc(speciesId).update(updatedSpecies)
-    .then((res) => console.log(res))
+  
 }
 
 const getSpecies = async () => {
@@ -93,7 +104,6 @@ const createRoom = async (req) => {
     className: name,
     selectedHabitats
   })
-  .then((res) => console.log(res))
   .catch((err) => console.log(err));
 
 return Promise.resolve({message: 'Success'});
@@ -117,7 +127,6 @@ const getAllSpeciesInRoom = async (req) => {
   const snapshot = await getFirestore().collection('species').where('classID', '==', roomID).get()
 
   const speciesInRoom = snapshot.docs.map((doc) => {
-    console.log(doc.data())
     return {
     speciesName: doc.data().name,
     coordinatesByHabitat: doc.data().coordinatesByHabitat,
@@ -149,9 +158,38 @@ const createStudent = async (req) => {
   .then((res) => studentId = res.id)
   .catch((err) => console.log(err));
 
-  console.log(studentId);
   return Promise.resolve({ message: 'success', studentId });
 }
+
+const updateStudent = async (req) => {
+  const {
+    studentId,
+    habitatStatus
+  } = req.body
+
+  const updatedStudent = {};
+
+  const snapshot = await getFirestore().collection('student').doc(studentId).get();
+
+  console.log(habitatStatus);
+  if (habitatStatus) {
+    updatedStudent.habitatStatus = {
+      ...snapshot.data().habitatStatus,
+      ...habitatStatus
+    };
+  }
+
+  console.log(updatedStudent);
+
+  await getFirestore().collection('student').doc(studentId).update(updatedStudent)
+
+  const updatedRecord = await getFirestore().collection('student').doc(studentId).get()
+
+  console.log(updatedRecord.data());
+
+  return { habitatStatus: updatedRecord.data().habitatStatus };
+}
+
 
 const router = express.Router();
 
@@ -162,5 +200,6 @@ registerEndpoint(router, '/getSpecies', 'get', getSpecies);
 registerEndpoint(router, '/createRoom', 'post', createRoom);
 registerEndpoint(router, '/getRoom', 'post', getRoom);
 registerEndpoint(router, '/student', 'post', createStudent);
+registerEndpoint(router, '/student', 'put', updateStudent);
 
 module.exports = router;

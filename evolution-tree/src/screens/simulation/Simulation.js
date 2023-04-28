@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationBar from '../../components/navigationBar';
 import BackButton from '../../components/backButton';
 import './Simulation.scss';
@@ -15,16 +15,31 @@ const apiURL = emulatorsEnabled
 : 'https://us-central1-bsu-directed-study.cloudfunctions.net/api/getSpecies';
 function Simulation() {
   const navigate = useNavigate();
-  const [headIndex, setHeadIndex] = useState(0);
-  const [bodyIndex, setBodyIndex] = useState(0);
-  const [legIndex, setLegIndex] = useState(0);
-  const [earIndex, setEarIndex] = useState(0);
-  const [mouthIndex, setMouthIndex] = useState(0);
+  const location = useLocation();
+  const { state } = useLocation();
+  const {
+    savedHeadIndex,
+    savedBodyIndex,
+    savedLegIndex,
+    savedEarIndex,
+    savedMouthIndex,
+    savedName,
+    savedSpeciesId,
+    savedStudentId,
+    classID
+  } = state || {};
+  const [headIndex, setHeadIndex] = useState(savedHeadIndex || 0);
+  const [bodyIndex, setBodyIndex] = useState(savedBodyIndex || 0);
+  const [legIndex, setLegIndex] = useState(savedLegIndex || 0);
+  const [earIndex, setEarIndex] = useState(savedEarIndex || 0);
+  const [mouthIndex, setMouthIndex] = useState(savedMouthIndex || 0);
   const [savedSpecies, setSavedSpecies] = useState(null);
   const [options, setOptions] = useState([]);
   const [loadedOption, setLoadedOption] = useState(null);
-  const [name, setName] = useState('');
+  const [name, setName] = useState(savedName || '');
 
+
+  console.log(location)
   useEffect(() => {
     const getSpecies = async () => {
       const result = await axios.get(apiURL);
@@ -52,20 +67,26 @@ function Simulation() {
       legs: legIndex,
       mouth: mouthIndex,
       ear: earIndex,
-      name: name
+      name: name,
+      savedSpeciesId: savedSpeciesId
     });
 
     return result.data.speciesId
   }
 
+  console.log(savedStudentId);
+
   const handleNext = async () => {
-    const speciesId = await handleSave();
+    const speciesId = await handleSave(savedSpeciesId);
     navigate(`/habitatSelection`, {state: { headIndex: headIndex,
                                             bodyIndex: bodyIndex,
                                             legIndex: legIndex,
                                             mouthIndex: mouthIndex,
                                             earIndex: earIndex,
-                                            speciesId: speciesId
+                                            savedSpeciesId: savedSpeciesId || speciesId,
+                                            savedClassId: classID,
+                                            savedStudentId: savedStudentId,
+                                            name: name
                                           }})
   }
 

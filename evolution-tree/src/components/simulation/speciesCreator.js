@@ -45,7 +45,6 @@ function SpeciesCreator({
   const [currentLegs, setCurrentLegs] = useState(legs[legIndex]);
   const [currentMouth, setCurrentMouth] = useState(mouths[mouthIndex]);
   const [currentEar, setCurrentEar] = useState(ears[earIndex]);
-  console.log(bodies[3]);
 
   const handleClick = (indexType, direction) => {
     console.log('here');
@@ -136,7 +135,7 @@ function SpeciesCreator({
   const handleNameChange = (event) => {
     setName(event.target.value);
   }
-
+  console.log(name)
   return (
     <div key={key} className="species-creation-grid">
       <div className="species-image">
@@ -181,7 +180,7 @@ function SpeciesCreator({
       </div>
       <form className="namebox">
         <label>Species Name</label> 
-        <input type="text" value={name} onChange={(text) => handleNameChange(text)} />
+        <input type="text" value={name} onChange={(text) => handleNameChange(text)} defaultValue={name || ''} placeholder={name || ''}/>
       </form>
     </div>
   );

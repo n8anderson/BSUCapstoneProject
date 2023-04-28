@@ -4,8 +4,9 @@ import * as tf from '@tensorflow/tfjs';
 import { useEffect, useMemo, useRef, useState } from "react";
 import Dots from "react-activity/dist/Dots";
 import "react-activity/dist/Dots.css";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
+import Modal from 'react-modal';
 import {
   ComposedChart, Scatter, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, Label, Line, ReferenceLine
@@ -20,11 +21,16 @@ const emulatorsEnabled = true;
 
 function HabitatResults() {
 
+  const navigate = useNavigate();
   const location = useLocation();
   const [classroomSpecies, setClassroomSpecies] = useState([]);
   const [classroomCoordinates, setClassroomCoordinates] = useState(null)
   const [readyModel, setReadyModel] = useState(null);
   const [predictedScores, setPredictedScores] = useState(null);
+
+  const [completionCertificateVisible, setCompletionCertificateVisible] = useState(false);
+
+  const [studentCurrentStatus, setStudentCurrentStatus] = useState(null);
 
   const isPredicting = useRef(false);
   const isTraining = useRef(false);
@@ -37,12 +43,15 @@ function HabitatResults() {
     mouthIndex,
     speciesId,
     classID,
-    classHabitats
+    classHabitats,
+    name,
+    studentID
   } = location.state;
 
   const scoreTotals = useMemo(() => ({}), [])
   const allScores = useMemo(() => ({}), [])
 
+  console.log(name);
   useMemo(() => {
     if (allScores && scoreTotals) {
       classHabitats.forEach((habitat) => allScores[habitat] = [
@@ -155,13 +164,74 @@ function HabitatResults() {
   }, [predictedScores, scoreTotals])
 
   const isSufficientToPass = (habitat) => {
-    console.log(studentCoordinates[habitat].y >= successThresholds[studentCoordinates[habitat].x])
-    if (studentCoordinates[habitat].y >= successThresholds[studentCoordinates[habitat].x]) {
-      console.log('here')
+    if (studentCoordinates[habitat].y >= successThresholds[studentCoordinates[habitat].x] || (studentCurrentStatus && studentCurrentStatus[habitat])) {
       return true
     }
     return false
   }
+
+  useEffect(() => {
+    const saveStudentStatus = async () => {
+      if (studentCoordinates && Object.keys(studentCoordinates).length >= classHabitats.length && studentID) {
+        const habitatStatus = {};
+        Object.entries(studentCoordinates).forEach(([habitat, coordSet]) => {
+          const success = coordSet.y >= successThresholds[coordSet.x];
+          if (success) {
+            habitatStatus[habitat] = success
+          }
+        })
+        const url = "http://127.0.0.1:5001/bsu-directed-study/us-central1/api/student"
+        const result = await axios.put(url, { habitatStatus, studentId: studentID })
+        console.log(result.data.habitatStatus);
+        setStudentCurrentStatus(result.data.habitatStatus);
+      };
+    }
+    saveStudentStatus();
+  }, [studentCoordinates, classHabitats, studentID]);
+
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      width: 400,
+      height: 400
+    },
+  };
+
+  const getCompletionContent = () => (
+    <div>
+      <h2>Congratulations!</h2>
+      <p>You have completed all of the habitats by successfully surviving with your created species!</p>
+      <br />
+      <br />
+      <br />
+      <p>Please show this to your instructor to receive credit of completion!</p>
+      <button
+        style={{
+          width: 200,
+          height: 40,
+          margin: 'auto',
+          backgroundColor: '#637675',
+          boxShadow: '0 4 4 rgba(0, 0, 0, 0.4)',
+          borderRadius: 10,
+          fontFamily: 'Roboto',
+          fontStyle: 'normal',
+          fontWeight: 600,
+          fontSize: 18,
+          textAlign: 'center',
+          color: 'white',
+        }}
+        onClick={() => setCompletionCertificateVisible(false)}
+      >
+        Close
+      </button>
+    </div>
+  );
 
   return (
     <motion.div
@@ -171,6 +241,16 @@ function HabitatResults() {
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
     >
+      <Modal
+        isOpen={completionCertificateVisible}
+        style={customStyles}
+        onRequestClose={() => {
+          setCompletionCertificateVisible(false);
+        }}
+        ariaHideApp={false}
+      >
+        {getCompletionContent()}
+      </Modal>
       <NavigationBar />
       <div className="results-grid-wrapper">
         <div className="back-button-container">
@@ -224,6 +304,19 @@ function HabitatResults() {
                         }} />
                     </ComposedChart>
                   </ResponsiveContainer>
+                  <button
+                    onClick={() => navigate('../simulation', {state: {
+                      savedHeadIndex: headIndex,
+                      savedBodyIndex: bodyIndex,
+                      savedLegIndex: legIndex,
+                      savedEarIndex: earIndex,
+                      savedMouthIndex: mouthIndex,
+                      savedName: name,
+                      savedSpeciesId: speciesId,
+                      savedStudentId: studentID,
+                      classID
+                    }})}
+                  >Retry</button>
                 </div>
               ))}
 
@@ -244,6 +337,24 @@ function HabitatResults() {
             />
           </div>
         )}
+        {studentCurrentStatus && (
+          <button
+            className={Object.values(studentCurrentStatus).every((status) => status) ? 'completion-certificate' : 'completion-certificate-disabled' }
+            disabled={!Object.values(studentCurrentStatus).every((status) => status)}
+            onClick={() => setCompletionCertificateVisible(true)}
+          >
+            Get Completion Certificate
+          </button>
+        )}
+
+      </div>
+      <div className="back-to-home-container">
+        <button
+          className="back-to-home"
+          onClick={() => navigate('../')}
+        >
+          Reset and Back to Home
+        </button>
       </div>
     </motion.div>
   );
