@@ -183,7 +183,7 @@ const bodyInfo = {
     pros: 'Speed\nPrevents overheating ',
     cons: 'No heat trapped\nNo sun protection',
     habitatScores: {
-      arctic: 0,
+      arctic: -4,
       swamp: 3,
       ocean: 3,
       mountain: 0,
@@ -507,15 +507,15 @@ const habitatInfo = {
 }
 
 const successThresholds = {
-  0: 0.25,
-  1: 0.29,
-  2: 0.33,
-  3: 0.37,
-  4: 0.41,
-  5: 0.45,
-  6: 0.49,
-  7: 0.53,
-  8: 0.57,
+  0: 0.57,
+  1: 0.57,
+  2: 0.57,
+  3: 0.57,
+  4: 0.57,
+  5: 0.57,
+  6: 0.57,
+  7: 0.57,
+  8: 0.58,
   9: 0.61,
   10: 0.63,
   11: 0.66,

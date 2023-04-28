@@ -124,23 +124,6 @@ function Educator() {
     )
   };
 
-  // Fix download
-  const onDownloadClick = () => {
-    // using Java Script method to get PDF file
-    fetch('Simulation-LessonPlan.docx').then(response => {
-        response.blob().then(blob => {
-            // Creating new object of PDF file
-            const fileURL = window.URL.createObjectURL(blob);
-            // Setting various property values
-            let alink = document.createElement('a');
-            alink.href = fileURL;
-            alink.download = '../assets/simulationAssets/Simulation-LessonPlan.docx';
-            alink.click();
-        })
-    })
-  }
-
-
   return (
     <motion.div
       className="educator"
@@ -238,9 +221,9 @@ function Educator() {
                 src={lessonPreview}
                 className="lesson-preview"
               />
-              <div className="activity-button" onClick={onDownloadClick}>
+              <a className="activity-button" href="https://docs.google.com/document/d/17upu0VPojcUnhWrh4RjflQXtZclKGN_ntljs1meJGMY/edit?usp=sharing">
                 <h2>Download Entire Lesson Plan</h2>
-              </div>
+              </a>
             </div>
           </div>
         </div>
@@ -250,7 +233,7 @@ function Educator() {
             <a className="material-button" href="https://forms.gle/AJyQVcVH5W7E7CpZ6">
               <h2>Warmup</h2>
             </a>
-            <a className="material-button" href="https://forms.gle/AJyQVcVH5W7E7CpZ6">
+            <a className="material-button" href="https://forms.gle/s8AWmGi5YzELAhaD9">
               <h2>Simulation Activity Worksheet</h2>
             </a>
             <div className="material-button" onClick={() => setModalVisible(true)}>
