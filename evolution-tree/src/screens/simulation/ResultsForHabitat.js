@@ -17,7 +17,7 @@ import { legInfo, headInfo, mouthInfo, earInfo, bodyInfo, habitatInfo, successTh
 import { createModel, generateData, trainModel } from "../../hooks/tensorFlow";
 import './ResultsForHabitat.scss';
 
-const emulatorsEnabled = true;
+const emulatorsEnabled = false;
 
 function HabitatResults() {
 

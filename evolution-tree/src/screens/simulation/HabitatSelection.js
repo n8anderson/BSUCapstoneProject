@@ -36,7 +36,7 @@ const tailBody = require('../../assets/simulationAssets/bodyAssets/tailBody.png'
 
 const baseImage = require('../../assets/simulationAssets/bodyAssets/baseImage.png');
 
-const emulatorsEnabled = true;
+const emulatorsEnabled = false;
 
 const apiURL = emulatorsEnabled
 ? 'http://127.0.0.1:5001/bsu-directed-study/us-central1/api/getRoom'

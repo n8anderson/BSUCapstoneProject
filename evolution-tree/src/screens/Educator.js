@@ -9,7 +9,7 @@ import axios from 'axios';
 import { habitatInfo } from '../hooks/info-helper';
 import HabitatSelectionButton from '../components/habitatSelectionButton';
 
-const emulatorsEnabled = true;
+const emulatorsEnabled = false;
 
 const lessonPreview = require('../assets/simulationAssets/lessonPreview.png');
 

@@ -9,7 +9,7 @@ import { bodyInfo, headInfo, legInfo, mouthInfo, earInfo } from '../../hooks/inf
 import axios from 'axios';
 import Select from "react-dropdown-select";
 
-const emulatorsEnabled = true;
+const emulatorsEnabled = false;
 const apiURL = emulatorsEnabled
 ? `http://127.0.0.1:5001/bsu-directed-study/us-central1/api/getSpecies`
 : 'https://us-central1-bsu-directed-study.cloudfunctions.net/api/getSpecies';

@@ -26,7 +26,7 @@ import HabitatResults from './screens/simulation/ResultsForHabitat';
 
 // Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const emulatorsEnabled = true;
+const emulatorsEnabled = false;
 const firebaseConfig = emulatorsEnabled ? 
 {
   apiKey: "AIzaSyCFAtoMg1YNQIDlJrS76hQe0qPVMjq449M",
