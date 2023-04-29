@@ -5,10 +5,8 @@
   position: relative;
 
   .background {
-
+    width: 100vw;
     .arctic {
-      height: 100vh;
-      width: 100vw;
       justify-content: space-evenly;
       display: flex;
       flex-direction: row;
@@ -20,8 +18,6 @@
     }
 
     .desert {
-      height: 100vh;
-      width: 100vw;
       display: flex;
       flex-direction: row;
       justify-content: space-evenly;
@@ -33,8 +29,6 @@
     }
 
     .ocean {
-      height: 100vh;
-      width: 100vw;
       display: flex;
       flex-direction: row;
       background-image: url(/assets/simulationBackgrounds/ocean.png);
@@ -46,8 +40,6 @@
     }
 
     .rainforest {
-      height: 100vh;
-      width: 100vw;
       display: flex;
       flex-direction: row;
       justify-content: space-evenly;
@@ -59,12 +51,8 @@
     }
 
     .grassland {
-      height: 100vh;
-      width: 100vw;
       display: flex;
       flex-direction: row;
-      max-height: 100vh;
-      max-width: 100vw;
       justify-content: space-evenly;
       background-image: url(/assets/simulationBackgrounds/grassland.png);
       background-repeat: no-repeat;
@@ -74,21 +62,17 @@
     }
 
     .savannah {
-      height: 100vh;
-      width: 100vw;
       display: flex;
       flex-direction: row;
       justify-content: space-evenly;
       background-image: url(/assets/simulationBackgrounds/savannah.png);
       background-repeat: no-repeat;
-      background-size: 100vw 100vh;
+      background-size: cover;
       align-items: center;
       margin: auto;
     }
 
     .mountain {
-      height: 100vh;
-      width: 100vw;
       display: flex;
       flex-direction: row;
       justify-content: space-evenly;
@@ -100,21 +84,17 @@
     }
 
     .deciduous-forest  {
-      height: 100vh;
-      width: 100vw;
       display: flex;
       flex-direction: row;
       justify-content: space-evenly;
       background-image: url(/assets/simulationBackgrounds/temperateForest.png);
       background-repeat: no-repeat;
-      background-size: 100vw 100vh;
+      background-size: cover;
       align-items: center;
       margin: auto;
     }
 
     .swamp {
-      height: 100vh;
-      width: 100vw;
       display: flex;
       flex-direction: row;
       justify-content: space-evenly;
@@ -126,8 +106,6 @@
     }
 
     .cave {
-      height: 100vh;
-      width: 100vw;
       display: flex;
       flex-direction: row;
       justify-content: space-evenly;
@@ -166,7 +144,34 @@
     }
 
     .common-container {
-      min-width: 22vw;
+      min-width: fit-content;
+      min-height: 100vh;
+      .load-habitat {
+        margin-top: 100px;
+        width: 18vw;
+        background-color: white;
+        margin-left: auto;
+        margin-right: 5%;
+        margin-bottom: 5%;
+      }
+
+      .select-class-container {
+        display: flex;
+        flex-direction: row;
+        .classname {
+          width: 15vw;
+          align-self: center;
+        }
+
+        button {
+          background-color: black;
+          color: white;
+          font-size: 20px;
+          padding: 10px;
+          border-radius: 5px;
+          margin-right: 5%;
+        }
+      }
       .common-character-box {
         display: flex;
         flex-direction: column;
@@ -215,8 +220,35 @@
           }
         }
       }
+
+      .next {
+        vertical-align: bottom;
+        height: 5vh;
+        width: 150px;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+        border-radius: 5px;
+        background-color: whitesmoke;
+        margin-right: 5%;
+        margin-left: auto;
+        margin-top: auto;
+        margin-bottom: 0px;
+      }
+      .next:hover {
+        background-color: #732A19;
+        h2 {
+          color: white;
+        }
+      }
+        
+      .next:active {
+        background-color: #8B3F2D;
+        color: white;
+      }
     }
 
+    .image-container {
+      background-color: transparent;
+    }
 
     .back-button-container {
       position: absolute;
@@ -234,41 +266,12 @@
       min-width: 40vw;
       padding: 25px;
     }
-      
-    .interact-box {
-      flex-direction: row;
-      justify-content: space-between;
-      position: absolute;
-      width: fit-content;
-      align-self: flex-end;
-      right: 2%;
-      bottom: 1px;
-      .next {
-        min-height: 5vh;
-        min-width: 150px;
-        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
-        border-radius: 5px;
-        background-color: whitesmoke;
-      }
-      .next:hover {
-        background-color: #732A19;
-        h2 {
-          color: white;
-        }
-      }
-        
-      .next:active {
-        background-color: #8B3F2D;
-        color: white;
-      }
-    }
+  
     .random-box {
-      position: absolute;
       flex-direction: row;
       justify-content: space-between;
       width: fit-content;
-      left: 50%;
-      translate: -50%;
+      margin: auto;
       
     
       .random {
@@ -299,47 +302,33 @@
         color: white;
       }
     }
-      
-    .load-habitat {
-      position: absolute;
-      width: 18vw;
-      top: 15%;
-      right: 40px;
-      background-color: white;
-    }
-
-    .image-container {
-      background-color: transparent;
-    }
-
-    .classname {
-      position: absolute;
-      width: 18vw;
-      top: 25%;
-      right: 40px;
-    }
     
     .class-header {
-      position: absolute;
       background-color: white;
       padding-inline: 20px;
       top: 18vh;
       width: fit-content;
-      left: 50%;
+      margin: auto;
       text-align: center;
-      translate: -42%;
+      margin-bottom: 2%;
       border-radius: 8px;
     }
     .student-header {
       background-color: white;
-      position: absolute;
       width: fit-content;
       padding-inline: 20px;
       bottom: 2vh;
-      left: 50%;
+      margin: auto;
       text-align: center;
-      translate: -45%;
       border-radius: 8px;
+      margin-bottom: 2%;
+    }
+
+    .species-name {
+      background-color: antiquewhite;
+      width: 20%;
+      margin: auto;
+      border-radius: 5px;
     }
   } 
 }

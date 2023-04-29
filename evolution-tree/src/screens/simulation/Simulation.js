@@ -15,7 +15,6 @@ const apiURL = emulatorsEnabled
 : 'https://us-central1-bsu-directed-study.cloudfunctions.net/api/getSpecies';
 function Simulation() {
   const navigate = useNavigate();
-  const location = useLocation();
   const { state } = useLocation();
   const {
     savedHeadIndex,
@@ -39,7 +38,6 @@ function Simulation() {
   const [name, setName] = useState(savedName || '');
 
 
-  console.log(location)
   useEffect(() => {
     const getSpecies = async () => {
       const result = await axios.get(apiURL);
@@ -74,8 +72,6 @@ function Simulation() {
     return result.data.speciesId
   }
 
-  console.log(savedStudentId);
-
   const handleNext = async () => {
     const speciesId = await handleSave(savedSpeciesId);
     navigate(`/habitatSelection`, {state: { headIndex: headIndex,
@@ -90,6 +86,76 @@ function Simulation() {
                                           }})
   }
 
+  const handleClick = (indexType, direction) => {
+    if (indexType === 'head') {
+      if (headIndex === Object.keys(headInfo).length - 1 && direction === 'right') {
+        setHeadIndex(0)
+      } else if (headIndex === 0 && direction === 'left'){
+        setHeadIndex(Object.keys(headInfo).length - 1);
+      } else {
+        if (direction === 'right') {
+          setHeadIndex(headIndex + 1);
+        } else {
+          setHeadIndex(headIndex - 1);
+        }
+      }
+    }
+    if (indexType === 'body') {
+      if (bodyIndex === Object.keys(bodyInfo).length - 1 && direction === 'right') {
+        setBodyIndex(0);
+      } else if (bodyIndex === 0 && direction === 'left'){
+        setBodyIndex(Object.keys(bodyInfo).length - 1);
+      } else {
+        if (direction === 'right') {
+          setBodyIndex(bodyIndex + 1);
+        } else {
+          setBodyIndex(bodyIndex - 1);
+        }
+      }
+    }
+    if (indexType === 'leg') {
+      if (legIndex === Object.keys(legInfo).length - 1 && direction === 'right') {
+        setLegIndex(0);
+      } else if (legIndex === 0 && direction === 'left'){
+        setLegIndex(Object.keys(legInfo).length - 1);
+      } else {
+        if (direction === 'right') {
+          setLegIndex(legIndex + 1);
+        } else {
+          setLegIndex(legIndex - 1);
+        }
+      }
+    }
+
+    if (indexType === 'mouth') {
+      if (mouthIndex === Object.keys(mouthInfo).length - 1 && direction === 'right') {
+        setMouthIndex(0);
+      } else if (mouthIndex === 0 && direction === 'left'){
+        setMouthIndex(Object.keys(mouthInfo).length - 1);
+      } else {
+        if (direction === 'right') {
+          setMouthIndex(mouthIndex + 1);
+        } else {
+          setMouthIndex(mouthIndex - 1);
+        }
+      }
+    }
+
+    if (indexType === 'ear') {
+      if (earIndex === Object.keys(earInfo).length - 1 && direction === 'right') {
+        setEarIndex(0);
+      } else if (earIndex === 0 && direction === 'left'){
+        setEarIndex(Object.keys(earInfo).length - 1);
+      } else {
+        if (direction === 'right') {
+          setEarIndex(earIndex + 1);
+        } else {
+          setEarIndex(earIndex - 1);
+        }
+      }
+    }
+  }
+
   return (
     <motion.div className="simulation-screen">
       <NavigationBar />
@@ -99,7 +165,19 @@ function Simulation() {
       <div className="creator-content">
         <div className="left-info">
           <div className="infobox-head">
-            <h3>Eye Attribute:</h3>
+            <div className="header-container">
+              <button
+                onClick={() => handleClick('head', 'left')}
+              >
+                Prev
+              </button>
+              <h3>Eye Attribute:</h3>
+              <button
+                onClick={() => handleClick('head', 'right')}
+              >
+                Next
+              </button>
+            </div>
             <p className="bold">{headInfo[headIndex].info}</p>
             <p><b>Pros:</b></p>
             {headInfo[headIndex].pros.split('\n').map((value) => (
@@ -111,7 +189,19 @@ function Simulation() {
             ))}
           </div>
           <div className="infobox-leg">
-            <h3>Hands/Feet Attribute:</h3>
+            <div className="header-container">
+              <button
+                onClick={() => handleClick('leg', 'left')}
+              >
+                Prev
+              </button>
+              <h3>Hands/Feet Attribute:</h3>
+              <button
+                onClick={() => handleClick('leg', 'right')}
+              >
+                Next
+              </button>
+            </div>
             <p className="bold">{legInfo[legIndex].info}</p>
             <p><b>Pros:</b></p>
             {legInfo[legIndex].pros.split('\n').map((value) => (
@@ -123,7 +213,19 @@ function Simulation() {
             ))}
           </div>
           <div className="infobox-mouth">
-            <h3>Mouth Attribute:</h3>
+            <div className="header-container">
+              <button
+                onClick={() => handleClick('mouth', 'left')}
+              >
+                Prev
+              </button>
+              <h3>Mouth Attribute:</h3>
+              <button
+                onClick={() => handleClick('mouth', 'right')}
+              >
+                Next
+              </button>
+            </div>
             <p className="bold">{mouthInfo[mouthIndex].info}</p>
             <p><b>Pros:</b></p>
             {mouthInfo[mouthIndex].pros.split('\n').map((value) => (
@@ -138,15 +240,10 @@ function Simulation() {
         <div className="species-creator">
           <SpeciesCreator
             headIndex={headIndex}
-            setHeadIndex={setHeadIndex}
             bodyIndex={bodyIndex}
-            setBodyIndex={setBodyIndex}
             legIndex={legIndex}
-            setLegIndex={setLegIndex}
             earIndex={earIndex}
-            setEarIndex={setEarIndex}
             mouthIndex={mouthIndex}
-            setMouthIndex={setMouthIndex}
             key={`${headIndex}${bodyIndex}${legIndex}${earIndex}${mouthIndex}`}
             name={name}
             setName={setName}
@@ -163,7 +260,19 @@ function Simulation() {
             </div>
           </div>
           <div className="infobox-ear">
-            <h3>Ear Attribute:</h3>
+            <div className="header-container">
+              <button
+                onClick={() => handleClick('ear', 'left')}
+              >
+                Prev
+              </button>
+              <h3>Ear Attribute:</h3>
+              <button
+                onClick={() => handleClick('ear', 'right')}
+              >
+                Next
+              </button>
+            </div>
             <p className="bold">{earInfo[earIndex].info}</p>
             <p><b>Pros:</b></p>
             {earInfo[earIndex].pros.split('\n').map((value) => (
@@ -175,7 +284,19 @@ function Simulation() {
             ))}
           </div>
           <div className="infobox-body">
-            <h3>Body Attribute:</h3>
+            <div className="header-container">
+              <button
+                onClick={() => handleClick('body', 'left')}
+              >
+                Prev
+              </button>
+              <h3>Body Attribute:</h3>
+              <button
+                onClick={() => handleClick('body', 'right')}
+              >
+                Next
+              </button>
+            </div>
             <p className="bold">{bodyInfo[bodyIndex].info}</p>
             <p><b>Pros:</b></p>
             {bodyInfo[bodyIndex].pros.split('\n').map((value) => (

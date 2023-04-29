@@ -51,7 +51,6 @@ function HabitatResults() {
   const scoreTotals = useMemo(() => ({}), [])
   const allScores = useMemo(() => ({}), [])
 
-  console.log(name);
   useMemo(() => {
     if (allScores && scoreTotals) {
       classHabitats.forEach((habitat) => allScores[habitat] = [
@@ -182,7 +181,6 @@ function HabitatResults() {
         })
         const url = "http://127.0.0.1:5001/bsu-directed-study/us-central1/api/student"
         const result = await axios.put(url, { habitatStatus, studentId: studentID })
-        console.log(result.data.habitatStatus);
         setStudentCurrentStatus(result.data.habitatStatus);
       };
     }
@@ -327,6 +325,7 @@ function HabitatResults() {
               <p>If you are above the red line and to the right of the blue line you can survive AND reproduce</p>
               <p>If you are to the left of the blue line, but above the red line, you species can survive, but won't reproduce effectively</p>
               <p>If you are below the red line, you died</p>
+              <p>To survive you must be to the right of the blue line and near the red line</p>
             </div></>
           )
         }

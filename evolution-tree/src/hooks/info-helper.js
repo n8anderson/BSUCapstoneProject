@@ -120,6 +120,23 @@ const mouthInfo = {
       rainforest: 3,
       grassland: 3
     }
+  },
+  4: {
+    info: 'Flattened Teeth',
+    pros: 'Can be used to grind grain',
+    cons: 'Cant tear meat\nIneffective for protection',
+    habitatScores: {
+      arctic: 0,
+      swamp: 0,
+      ocean: 0,
+      mountain: 3,
+      'deciduous-forest': 1,
+      savannah: 3,
+      cave: 0,
+      desert: 2,
+      rainforest: 1,
+      grassland: 3
+    }
   }
 }
 
@@ -246,6 +263,40 @@ const bodyInfo = {
       grassland: 1
     }
   },
+  4: {
+    info: 'Camouflage body',
+    pros: 'Can hide from predators',
+    cons: 'Significant Energy to use\nCant blend in with every type of environment',
+    habitatScores: {
+      arctic: 3,
+      swamp: 3,
+      ocean: 2,
+      mountain: 2,
+      'deciduous-forest': 1,
+      savannah: 2,
+      cave: 1,
+      desert: 3,
+      rainforest: 3,
+      grassland: 1
+    }
+  },
+  5: {
+    info: 'Body with Tail',
+    pros: 'Assists with climbing\nIncrease maneuverability\nCan be used for defense',
+    cons: 'Additional energy to have\nCan be injured',
+    habitatScores: {
+      arctic: 1,
+      swamp: 3,
+      ocean: 3,
+      mountain: 2,
+      'deciduous-forest': 2,
+      savannah: 2,
+      cave: 1,
+      desert: 2,
+      rainforest: 3,
+      grassland: 2
+    }
+  },
 }
 
 const legInfo = {
@@ -266,7 +317,6 @@ const legInfo = {
       grassland: 0
     }
   },
-  // TODO: This does not mean angle hands
   1: {
     info: 'Tapered legs',
     pros: 'Gripping food\nClimbing trees',
@@ -333,6 +383,40 @@ const legInfo = {
       desert: 0,
       rainforest: 0,
       grassland: 0
+    }
+  },
+  5: {
+    info: 'Hooves',
+    pros: 'Run faster\nTravel on multiple terrains',
+    cons: 'Cannot hold anything\nIneffective in attacking prey animals',
+    habitatScores: {
+      arctic: 1,
+      swamp: 0,
+      ocean: -1,
+      mountain: 2,
+      'deciduous-forest': 0,
+      savannah: 3,
+      cave: 0,
+      desert: 1,
+      rainforest: 0,
+      grassland: 3
+    }
+  },
+  6: {
+    info: 'Wings',
+    pros: 'Can be used to reach height\nUseful for travel',
+    cons: 'Poor defense\nCannot pickup anything',
+    habitatScores: {
+      arctic: 1,
+      swamp: 2,
+      ocean: -1,
+      mountain: 2,
+      'deciduous-forest': 2,
+      savannah: 2,
+      cave: 3,
+      desert: 2,
+      rainforest: 2,
+      grassland: 2
     }
   }
 }

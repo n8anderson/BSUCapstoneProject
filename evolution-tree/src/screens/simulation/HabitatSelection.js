@@ -16,18 +16,23 @@ const balineMouth = require('../../assets/simulationAssets/bodyAssets/balineMout
 const beakMouth = require('../../assets/simulationAssets/bodyAssets/beakMouth.png');
 const sharpTeethMouth = require('../../assets/simulationAssets/bodyAssets/sharpTeethMouth.png');
 const longTongueMouth = require('../../assets/simulationAssets/bodyAssets/longTongueMouth.png');
+const flattenMouth = require('../../assets/simulationAssets/bodyAssets/flattenMouth.png');
 const cuppedEar = require('../../assets/simulationAssets/bodyAssets/cuppedEar.png');
 const smallEar = require('../../assets/simulationAssets/bodyAssets/smallEar.png');
 const noEar = require('../../assets/simulationAssets/bodyAssets/noEar.png');
 const webbedHand = require('../../assets/simulationAssets/bodyAssets/webbedHand.png');
 const taperedHand = require('../../assets/simulationAssets/bodyAssets/taperedHand.png');
 const clawHand = require('../../assets/simulationAssets/bodyAssets/clawHand.png');
+const wingHand = require('../../assets/simulationAssets/bodyAssets/wingHand.png');
+const hoofHand = require('../../assets/simulationAssets/bodyAssets/hoofHand.png');
 const nailedHand = require('../../assets/simulationAssets/bodyAssets/nailedHand.png');
 const paddleHand = require('../../assets/simulationAssets/bodyAssets/paddleHand.png');
 const bareBody = require('../../assets/simulationAssets/bodyAssets/bareBody.png');
 const hairBody = require('../../assets/simulationAssets/bodyAssets/hairBody.png');
 const featherBody = require('../../assets/simulationAssets/bodyAssets/featherBody.png');
 const scaleBody = require('../../assets/simulationAssets/bodyAssets/scaleBody.png');
+const camouflageBody = require('../../assets/simulationAssets/bodyAssets/camouflageBody.png');
+const tailBody = require('../../assets/simulationAssets/bodyAssets/tailBody.png');
 
 const baseImage = require('../../assets/simulationAssets/bodyAssets/baseImage.png');
 
@@ -82,9 +87,9 @@ function HabitatSelection() {
   const [studentID, setStudentID] = useState(savedStudentId || null);
 
   const heads = [smallEyes, noEyes, bigEyes];
-  const bodies = [bareBody, hairBody, featherBody, scaleBody];
-  const legs = [webbedHand, taperedHand, clawHand, nailedHand, paddleHand];
-  const mouths = [beakMouth, balineMouth, sharpTeethMouth, longTongueMouth];
+  const bodies = [bareBody, hairBody, featherBody, scaleBody, camouflageBody, tailBody];
+  const legs = [webbedHand, taperedHand, clawHand, nailedHand, paddleHand, hoofHand, wingHand];
+  const mouths = [beakMouth, balineMouth, sharpTeethMouth, longTongueMouth, flattenMouth];
   const ears = [cuppedEar, smallEar, noEar];
 
   const [classOptions, setClassOptions] = useState(null);
@@ -108,17 +113,6 @@ function HabitatSelection() {
     }})
   }
 
-  const buttonStyle = {
-    backgroundColor: 'black',
-    color: 'white',
-    fontSize: 20,
-    padding: 10,
-    borderRadius: 5,
-    position: 'absolute',
-    top: '22.5%',
-    right: 0
-  };
-
   const modalButtonStyle = {
     backgroundColor: 'black',
     color: 'white',
@@ -133,9 +127,9 @@ function HabitatSelection() {
 
   useEffect(() => {
     const loadExistingClassInfo = async () => {
-      if (classID && options && !className) {
+      if (savedClassId && options && !className) {
         const loadedInfo = await axios.post(apiURL, {
-          roomID: classID
+          roomID: savedClassId
         })
         
         const { selectedHabitats } = loadedInfo.data
@@ -146,7 +140,8 @@ function HabitatSelection() {
       }
     }
     loadExistingClassInfo();
-  }, [classID, options, className])
+  }, [savedClassId, options, className])
+
   const onConfirm = async () => {
     if (!classID) {
       return
@@ -249,16 +244,19 @@ function HabitatSelection() {
               className
               &&
               (
-                <h1 className="class-header">{className}</h1>
+                <h1 className="class-header">Class Name: {className}</h1>
               )
             }
             {
               studentID
               &&
               (
-                <h1 className="student-header">{studentAlias}</h1>
+                <h1 className="student-header">Student Alias: {studentAlias}</h1>
               )
             }
+            { name && (
+              <p className="species-name">Species Name: {name}</p>
+            )}
             <div className="species-image">
               <div className="image-container">
                 <img src={baseImage} className="" alt="Species base" />
@@ -268,7 +266,6 @@ function HabitatSelection() {
                 <img src={mouths[mouthIndex]} className="mouth" alt="Species mouth" />
                 <img src={ears[earIndex]} className="ear" alt="Species ear" />
               </div>
-              <p>{name}</p>
             </div>
             <div className="random-box">
               <div className="random" onClick={() => handleRandom()}>
@@ -278,6 +275,23 @@ function HabitatSelection() {
           </div>
           { !className && (
             <div className="common-container">
+              <Select 
+                options={classOptions || options}
+                onChange={(values) => setSelectedHabitat(values[0].value)}
+                className="load-habitat"
+              />
+              <div className="select-class-container">
+                <form className="classname">
+                  <label style={{ marginRight: 15 }}>Class ID:</label> 
+                  <input type="text" onChange={(event) => setClassID(event.target.value)} defaultValue={classID || ''}/>
+                </form>
+                <button
+                  className="confirm-button"
+                  onClick={() => onConfirm()}
+                >
+                  Confirm
+                </button>
+              </div>
               <div className="common-character-box">
                 <h3>Common Characters:</h3>
                 <ul>
@@ -302,31 +316,35 @@ function HabitatSelection() {
                     ))}
                   </div>
               </div>
+              <div className="next" onClick={() => handleNext()}>
+                <h2>{className ? 'Start' : 'Next'}</h2>
+              </div>
             </div>
           )}
           { className && (
-            <div className="common-container" />
-          )}
-          <Select 
-            options={classOptions || options}
-            onChange={(values) => setSelectedHabitat(values[0].value)}
-            className="load-habitat"
-          />
-          <form className="classname">
-            <label style={{ marginRight: 15 }}>Class ID:</label> 
-            <input type="text" onChange={(event) => setClassID(event.target.value)} />
-          </form>
-          <button
-            style={buttonStyle}
-            onClick={() => onConfirm()}
-          >
-            Confirm
-          </button>
-          <div className="interact-box">
-            <div className="next" onClick={() => handleNext()}>
-              <h2>{className ? 'Start' : 'Next'}</h2>
+            <div className="common-container">
+              <Select 
+                options={classOptions || options}
+                onChange={(values) => setSelectedHabitat(values[0].value)}
+                className="load-habitat"
+              />
+              <div className="select-class-container">
+                <form className="classname">
+                  <label style={{ marginRight: 15 }}>Class ID:</label> 
+                  <input type="text" onChange={(event) => setClassID(event.target.value)} placeholder={classID || ''}/>
+                </form>
+                <button
+                  className="confirm-button"
+                  onClick={() => onConfirm()}
+                >
+                  Confirm
+                </button>
+              </div>
+              <div className="next" onClick={() => handleNext()}>
+                <h2>{className ? 'Start' : 'Next'}</h2>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </motion.div>

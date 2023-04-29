@@ -20,7 +20,7 @@
   .image-container {
     display: flex;
     max-width: fit-content;
-    background-color: #8B3F2D;
+    background-color: #D3D3D3;
     align-self: center;
   
     margin-top: 25px;
@@ -50,7 +50,6 @@
   grid-column: 2 / 3;
   grid-row: 2 / 3;
   min-height: 2vh;
-
   padding: 25px;
 }
 .character-head-right {
