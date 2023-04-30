@@ -248,7 +248,7 @@ function HabitatSelection() {
               )
             }
             {
-              studentID
+              (studentID && studentAlias != null)
               &&
               (
                 <h1 className="student-header">Student Alias: {studentAlias}</h1>

@@ -189,8 +189,6 @@ function HabitatResults() {
     saveStudentStatus();
   }, [studentCoordinates, classHabitats, studentID]);
 
-  console.log(studentCurrentStatus);
-
 
   const customStyles = {
     content: {

@@ -73,9 +73,7 @@ function Educator() {
       selectedHabitats,
       classUUID: uuid
     };
-    console.log(payload);
     axios.post(apiURL, payload)
-      .then((res) => console.log(res))
       .catch((err) => console.log(err));
     setIsConfirmed(true);
   }
