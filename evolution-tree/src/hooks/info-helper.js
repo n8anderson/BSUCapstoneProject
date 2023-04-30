@@ -358,7 +358,7 @@ const legInfo = {
     habitatScores: {
       arctic: 3,
       swamp: 2,
-      ocean: 1,
+      ocean: 0,
       mountain: 2,
       'deciduous-forest': 2,
       savannah: 2,
