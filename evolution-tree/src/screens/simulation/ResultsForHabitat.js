@@ -179,13 +179,17 @@ function HabitatResults() {
             habitatStatus[habitat] = success
           }
         })
-        const url = "http://127.0.0.1:5001/bsu-directed-study/us-central1/api/student"
+        const url = emulatorsEnabled
+          ? "http://127.0.0.1:5001/bsu-directed-study/us-central1/api/student"
+          : 'https://us-central1-bsu-directed-study.cloudfunctions.net/api/student';
         const result = await axios.put(url, { habitatStatus, studentId: studentID })
         setStudentCurrentStatus(result.data.habitatStatus);
       };
     }
     saveStudentStatus();
   }, [studentCoordinates, classHabitats, studentID]);
+
+  console.log(studentCurrentStatus);
 
 
   const customStyles = {
